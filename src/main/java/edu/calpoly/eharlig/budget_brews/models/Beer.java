@@ -1,12 +1,17 @@
 package edu.calpoly.eharlig.budget_brews.models;
 
+import java.util.ArrayList;
+
 public class Beer {
 	private String name;
 	private double price;
 	private int quantity;
-	private Store store;
+	private String storeName;
+	private long timestamp;
+	private ArrayList<BeerHistory> history;
 	
 	public Beer() {
+		this.history = new ArrayList<BeerHistory>();
 		
 	}
 
@@ -31,12 +36,30 @@ public class Beer {
 		this.quantity = quantity;
 	}
 
-	public Store getStore() {
-		return store;
+	public String getStoreName() {
+		return storeName;
 	}
 
-	public void setStore(Store store) {
-		this.store = store;
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public ArrayList<BeerHistory> getHistory() {
+		if (history == null)
+			return new ArrayList<BeerHistory>();
+		return history;
+	}
+
+	public void setHistory(ArrayList<BeerHistory> history) {
+		this.history = history;
 	}
 
 }
