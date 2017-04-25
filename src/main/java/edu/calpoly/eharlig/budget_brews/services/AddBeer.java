@@ -22,11 +22,10 @@ public class AddBeer implements RequestHandler<Beer, Object> {
 
 	// need to think of how to add beer to store?
 	public Object handleRequest(Beer beer, Context context) {
-		Table table = dynamoDB.getTable(beer.getStore().getName().replaceAll(" ", "_"));
+		Table table = dynamoDB.getTable("beer");
 		
 		Item item = new Item();
-		item.withPrimaryKey("beerId", beer.getId());
-		item.withString("name", beer.getName());
+		item.withPrimaryKey("name", beer.getName());
 		item.withInt("quantity", beer.getQuantity());
 		item.withDouble("price", beer.getPrice());
 

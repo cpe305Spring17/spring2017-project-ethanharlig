@@ -3,7 +3,6 @@ package edu.calpoly.eharlig.budget_brews.models;
 public class Beer {
 	private String name;
 	private double price;
-	private int id;
 	private int quantity;
 	private Store store;
 	
@@ -22,14 +21,6 @@ public class Beer {
 	}
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getQuantity() {
