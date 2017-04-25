@@ -29,11 +29,9 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 		Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
 		
 		Item item = table.getItem("name", beer.getName());
-		Beer thisBeer = new Beer();
-		thisBeer.setName(item.getString("name"));
 		List<Item> history = item.getList("history");
 		
-		ArrayList<BeerHistory> bHistory = new ArrayList<BeerHistory>();
+		List<BeerHistory> bHistory = new ArrayList<BeerHistory>();
 		
 		BeerHistory currentBeer = new BeerHistory();
 		
@@ -52,15 +50,17 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 			bHistory.add(bh);
 		}
 
-		thisBeer.setHistory(bHistory);
-		
 		Item toUpdate = new Item();
+		
+		for (BeerHistory bh: bHistory) {
+			System.out.println(bh.getPrice());
+		}
 		
 		toUpdate.withPrimaryKey("name", beer.getName());
 		toUpdate.withDouble("price", beer.getPrice());
 		toUpdate.withString("storeName", beer.getStoreName());
 		toUpdate.withLong("timestamp", System.currentTimeMillis());
-		toUpdate.withList("history", bHistory);
+//		toUpdate.withList("history", bHistory);
 		
 		return table.putItem(toUpdate);
 	}
