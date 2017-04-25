@@ -19,6 +19,8 @@ import edu.calpoly.eharlig.budget_brews.models.BeerHistory;
 //import edu.calpoly.eharlig.budget_brews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
+	// these are commented so that travis can pass
+	// need to think of a way to keep credentials here but have travis pass
 //	private static String AWS_KEY = new Credentials().getAwsAccessKey();
 //	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
 	private static String AWS_KEY;
