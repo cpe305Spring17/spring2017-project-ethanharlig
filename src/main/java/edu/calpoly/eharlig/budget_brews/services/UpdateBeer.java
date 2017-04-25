@@ -19,15 +19,17 @@ import edu.calpoly.eharlig.budget_brews.models.BeerHistory;
 import edu.calpoly.eharlig.budget_brews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
-	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-			new BasicAWSCredentials(new Credentials().getAwsAccessKey(), new Credentials().getAwsSecretKey()))
-					.withRegion(Regions.US_WEST_2);
+	private static String AWS_KEY = new Credentials().getAwsAccessKey();
+	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
+
+	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
+			.withRegion(Regions.US_WEST_2);
 
 	private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
 	public PutItemOutcome handleRequest(Beer beer, Context context) {
 		Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
-		
+
 		Item item = table.getItem("name", beer.getName());
 
 		List<Item> history = item.getList("history");
@@ -37,7 +39,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 		currentBeer.setPrice(item.getDouble("price"));
 		currentBeer.setStoreName(item.getString("storeName"));
 		currentBeer.setTimestamp(item.getLong("timestamp"));
-		
+
 		bHistory.add(currentBeer);
 
 		for (Item i : history) {
@@ -45,22 +47,22 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 			bh.setPrice(i.getDouble("price"));
 			bh.setStoreName(i.getString("storeName"));
 			bh.setTimestamp(i.getLong("timestamp"));
-			
+
 			bHistory.add(bh);
 		}
 
 		Item toUpdate = new Item();
-		
-		for (BeerHistory bh: bHistory) {
+
+		for (BeerHistory bh : bHistory) {
 			System.out.println(bh.getPrice());
 		}
-		
+
 		toUpdate.withPrimaryKey("name", beer.getName());
 		toUpdate.withDouble("price", beer.getPrice());
 		toUpdate.withString("storeName", beer.getStoreName());
 		toUpdate.withLong("timestamp", System.currentTimeMillis());
-//		toUpdate.withList("history", bHistory);
-		
+		// toUpdate.withList("history", bHistory);
+
 		return table.putItem(toUpdate);
 	}
 

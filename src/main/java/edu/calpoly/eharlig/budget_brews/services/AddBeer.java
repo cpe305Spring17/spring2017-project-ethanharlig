@@ -14,9 +14,11 @@ import edu.calpoly.eharlig.budget_brews.models.Beer;
 import edu.calpoly.eharlig.budget_brews.util.Credentials;
 
 public class AddBeer implements RequestHandler<Beer, Object> {
-	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-			new BasicAWSCredentials(new Credentials().getAwsAccessKey(), new Credentials().getAwsSecretKey()))
-					.withRegion(Regions.US_WEST_2);
+	private static String AWS_KEY = new Credentials().getAwsAccessKey();
+	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
+
+	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
+			.withRegion(Regions.US_WEST_2);
 
 	private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
