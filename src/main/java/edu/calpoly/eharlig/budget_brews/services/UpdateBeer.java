@@ -29,12 +29,11 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 		Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
 		
 		Item item = table.getItem("name", beer.getName());
+
 		List<Item> history = item.getList("history");
-		
 		List<BeerHistory> bHistory = new ArrayList<BeerHistory>();
-		
+
 		BeerHistory currentBeer = new BeerHistory();
-		
 		currentBeer.setPrice(item.getDouble("price"));
 		currentBeer.setStoreName(item.getString("storeName"));
 		currentBeer.setTimestamp(item.getLong("timestamp"));

@@ -12,7 +12,6 @@ public class Beer {
 	
 	public Beer() {
 		this.history = new ArrayList<BeerHistory>();
-		
 	}
 
 	public String getName() {

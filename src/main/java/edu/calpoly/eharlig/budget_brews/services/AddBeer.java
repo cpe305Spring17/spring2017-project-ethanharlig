@@ -20,7 +20,6 @@ public class AddBeer implements RequestHandler<Beer, Object> {
 
 	private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
-	// need to think of how to add beer to store?
 	public Object handleRequest(Beer beer, Context context) {
 		Table table = dynamoDB.getTable("beer-" + Integer.toString(beer.getQuantity()));
 
