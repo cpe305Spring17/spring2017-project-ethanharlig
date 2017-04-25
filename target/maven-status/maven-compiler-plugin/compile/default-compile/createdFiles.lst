@@ -1,0 +1,8 @@
+edu/calpoly/eharlig/budget_brews/App.class
+edu/calpoly/eharlig/budget_brews/models/ThirtyPack.class
+edu/calpoly/eharlig/budget_brews/models/User.class
+edu/calpoly/eharlig/budget_brews/models/Beer.class
+edu/calpoly/eharlig/budget_brews/models/Store.class
+edu/calpoly/eharlig/budget_brews/util/Credentials.class
+edu/calpoly/eharlig/budget_brews/services/AddStore.class
+edu/calpoly/eharlig/budget_brews/models/SixPack.class
