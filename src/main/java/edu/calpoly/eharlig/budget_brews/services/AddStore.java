@@ -42,7 +42,7 @@ public class AddStore implements RequestHandler<Store, Object> {
 
 			ArrayList<AttributeDefinition> attributeDefinitions = new ArrayList<AttributeDefinition>();
 			attributeDefinitions
-					.add(new AttributeDefinition().withAttributeName(partitionKeyName).withAttributeType("S"));
+					.add(new AttributeDefinition().withAttributeName(partitionKeyName).withAttributeType("N"));
 
 			CreateTableRequest request = new CreateTableRequest().withTableName(tableName)
 					.withKeySchema(keySchema).withProvisionedThroughput(new ProvisionedThroughput()
