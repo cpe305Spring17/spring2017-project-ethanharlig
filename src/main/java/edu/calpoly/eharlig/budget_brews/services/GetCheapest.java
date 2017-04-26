@@ -16,7 +16,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budget_brews.models.Beer;
-import edu.calpoly.eharlig.budget_brews.util.Credentials;
 
 public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 	// these are commented so that travis can pass
