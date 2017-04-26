@@ -17,14 +17,15 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import edu.calpoly.eharlig.budget_brews.models.Beer;
 import edu.calpoly.eharlig.budget_brews.models.BeerHistory;
 //import edu.calpoly.eharlig.budget_brews.util.Credentials;
+import edu.calpoly.eharlig.budget_brews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 	// these are commented so that travis can pass
 	// need to think of a way to keep credentials here but have travis pass
-//	private static String AWS_KEY = new Credentials().getAwsAccessKey();
-//	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
-	private static String AWS_KEY;
-	private static String SECRET_KEY;
+	private static String AWS_KEY = new Credentials().getAwsAccessKey();
+	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
+	// private static String AWS_KEY;
+	// private static String SECRET_KEY;
 
 	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
 			.withRegion(Regions.US_WEST_2);
@@ -32,6 +33,16 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 	private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
 	public PutItemOutcome handleRequest(Beer beer, Context context) {
+		putItemQuantity(beer);
+		putItemStore(beer);
+
+		return null;
+	}
+
+	private static void putItemQuantity(Beer beer) {
+		// TODO add lowest price to table and set history with ordered
+		// timestamps
+
 		Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
 
 		Item item = table.getItem("name", beer.getName());
@@ -46,13 +57,15 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 
 		bHistory.add(currentBeer);
 
-		for (Item i : history) {
-			BeerHistory bh = new BeerHistory();
-			bh.setPrice(i.getDouble("price"));
-			bh.setStoreName(i.getString("storeName"));
-			bh.setTimestamp(i.getLong("timestamp"));
+		if (history != null) {
+			for (Item i : history) {
+				BeerHistory bh = new BeerHistory();
+				bh.setPrice(i.getDouble("price"));
+				bh.setStoreName(i.getString("storeName"));
+				bh.setTimestamp(i.getLong("timestamp"));
 
-			bHistory.add(bh);
+				bHistory.add(bh);
+			}
 		}
 
 		Item toUpdate = new Item();
@@ -67,7 +80,20 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 		toUpdate.withLong("timestamp", System.currentTimeMillis());
 		// toUpdate.withList("history", bHistory);
 
-		return table.putItem(toUpdate);
+		table.putItem(toUpdate);
+
+	}
+
+	private static void putItemStore(Beer beer) {
+		Table table = dynamoDB.getTable(beer.getStoreName().replaceAll(" ", "-").toLowerCase());
+
+		Item item = new Item();
+		item.withPrimaryKey("name", beer.getName());
+		item.withDouble("price", beer.getPrice());
+		item.withLong("timestamp", System.currentTimeMillis());
+
+		table.putItem(item);
+
 	}
 
 }
