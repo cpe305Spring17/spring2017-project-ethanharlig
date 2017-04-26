@@ -11,7 +11,17 @@ function getCheapest() {
             if (response == null) {
                 alert("Dang");
             } else {
-                console.log(response);
+                var brewsTableBody = $("#brews-table tbody");
+                response.forEach(function (entry) {
+                    var tr = "<tr>";
+                    tr += "<td>$" + entry.price + "</td>";
+                    tr += "<td>" + entry.quantity + " beers</td>";
+                    tr += "<td>" + entry.name + "</td>";
+                    tr += "<td>" + entry.storeName + "</td>";
+                    tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
+                    tr += "</tr>";
+                    brewsTableBody.append(tr);
+                });
             }
         },
         complete: function () {}
