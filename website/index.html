@@ -10,11 +10,33 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/res/js/home.js"></script>
 </head>
 
 <body>
-    <h1>NICE</h1>
-
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter By
+  <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Cost</a></li>
+            <li><a href="#">Store</a></li>
+        </ul>
+    </div>
+    <button id="refresh-btn" type="button" class="btn btn-default" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Refreshing">Refresh</button>
+    <div class="table-responsive">
+        <table id="brews-table" class="table">
+            <thead>
+                <tr class="heading-row">
+                    <th>Store</th>
+                    <th>6-pack</th>
+                    <th>12-pack</th>
+                    <th>30-pack</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
