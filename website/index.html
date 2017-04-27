@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
-    <link rel="stylesheet" href="/res/css/home.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/home.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="card" id="my_popup" style="width: 40%; padding: 15px; border-radius: 10px;">
-        <form class="update-submit">
+        <form id="update-submit" class="update-submit">
             <div class="card-block">
                 <h4 class="card-title">Update Beer Price</h4>
                 <div class="form-group">
@@ -77,17 +77,17 @@
                 </div>
                 <div class="form-group">
                     <div class="radio" style="height: 40px;">
-                        <label><input type="radio" name="quantity" id="quantity"> 12-pack</label>
+                        <label><input type="radio" name="quantity" id="quantity" value="12"> 12-pack</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="quantity" id="quantity"> 30-pack</label>
+                        <label><input type="radio" name="quantity" id="quantity" value="30"> 30-pack</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="number" class="form-control" id="price" placeholder="16.69">
+                    <input type="number" step=".01" class="form-control" id="price" placeholder="16.69">
                 </div>
-                <button id="submit-update-beer" class="my_popup_close">Submit</button>
+                <button type="submit" id="submit-update-beer">Submit</button>
             </div>
         </form>
     </div>
