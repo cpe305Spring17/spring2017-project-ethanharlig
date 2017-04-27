@@ -8,6 +8,10 @@ Crowdsource the best beer deals near you (_currently have support for San Luis O
 
 Users can view the stores around them and check the cost of how much different beer costs at that store. 
 
+
+# Current Demo of the site with a temporary generated background
+![](https://i.imgur.com/uAMicd7.gif)
+
 - Users
     - [ ] Upvote and downvote user updates
         - [ ] Down vote threshold causes deletion
