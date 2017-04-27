@@ -3,6 +3,9 @@
 }
 
 .dropdown {
-    padding-left: 30px;
-    padding-top: 30px;
+    margin: 15px;
+}
+
+.card {
+    display: none;
 }

@@ -1,5 +1,9 @@
 $(document).ready(function () {
     getCheapest();
+
+    $("#update-price").on("click", function () {
+        alert("Nice");
+    })
 });
 
 
