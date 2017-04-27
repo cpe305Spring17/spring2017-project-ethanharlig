@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig.svg?branch=master)](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig)
+[![Build Status](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig.svg?branch=master)](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig)\*
 
 ![Budget Brews](website/res/img/logo.png)
 
@@ -41,4 +41,4 @@ Users can view the stores around them and check the cost of how much different b
 
 
 
-<sub>Build may show as errored because I am not uploading my Credentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
+\*<sub>Build may show as errored because I am not uploading my Credentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
