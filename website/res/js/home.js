@@ -15,7 +15,6 @@ $(document).ready(function () {
 });
 
 
-
 function getCheapest() {
     $.ajax({
         url: API_URL + 'all-beers?',
@@ -91,7 +90,7 @@ function closeWindow() {
 
 function createBackground() {
     for (var x = -1; x < $(document).width() / 140; x += 1) {
-        for (var y = -1; y < $(document).height() / 140; y += 1) {
+        for (var y = -1; y < $(document).height() / 130; y += 1) {
             var img = $("<img />", {
                 style: "position:absolute; top:" + ((y * 14) + 5) + "%; left:" + (x * 15) + "%; z-index: -1;",
                 src: "res/img/party.gif",
