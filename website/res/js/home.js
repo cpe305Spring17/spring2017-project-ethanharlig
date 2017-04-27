@@ -1,6 +1,7 @@
 var API_URL = 'https://s7pc06oh92.execute-api.us-west-2.amazonaws.com/test/';
 
 $(document).ready(function () {
+    //    createBackground();
     getCheapest();
 
     $("#my_popup").popup({
@@ -86,4 +87,18 @@ function handleUpdate() {
 
 function closeWindow() {
     $("#my_popup").popup("hide");
+}
+
+function createBackground() {
+    for (var x = -1; x < $(document).width() / 140; x += 1) {
+        for (var y = -1; y < $(document).height() / 140; y += 1) {
+            var img = $("<img />", {
+                style: "position:absolute; top:" + ((y * 14) + 5) + "%; left:" + (x * 15) + "%; z-index: -1;",
+                src: "res/img/party.gif",
+                width: "19%"
+            });
+            img.appendTo($("#background-imgs"));
+        }
+    }
+
 }

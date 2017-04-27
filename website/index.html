@@ -18,80 +18,86 @@
 
 <body>
     <img class="img-responsive center-block" src="res/img/logo.png" alt="BudgetBrews" width="80%" />
-    <div style="margin: 15px;">
-        <button id="update-price" class="my_popup_open">Update a beer price</button>
+
+    <div id="background-imgs">
     </div>
 
-
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter By<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="#">Cost</a></li>
-            <li><a href="#">Store</a></li>
-            <li><a href="#">Beer</a></li>
-        </ul>
-    </div>
-
-
-    <div class="table" style="width: 80%;">
-        <div class="table-container">
-            <h1 class="text-center"><u>12 Packs</u></h1>
-            <table id="brews-table-12" class="table">
-                <thead>
-                    <th>Cost</th>
-                    <th>Brand</th>
-                    <th>Store Name</th>
-                    <th>Time Reported</th>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <button class="btn" id="show-12" value="hide">Show more</button>
-
+    <div id="container">
+        <div style="margin: 15px;">
+            <button id="update-price" class="my_popup_open">Update a beer price</button>
         </div>
-        <div class="table-container">
-            <h1 class="text-center"><u>30 Packs</u></h1>
-            <table id="brews-table-30" class="table">
-                <thead>
-                    <th>Cost</th>
-                    <th>Brand</th>
-                    <th>Store Name</th>
-                    <th>Time Reported</th>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <button class="btn" id="show-30" value="hide">Show more</button>
-        </div>
-    </div>
 
-    <div class="card" id="my_popup" style="width: 40%; padding: 15px; border-radius: 10px;">
-        <form id="update-submit" class="update-submit">
-            <div class="card-block">
-                <h4 class="card-title">Update Beer Price</h4>
-                <div class="form-group">
-                    <label for="store">Store:</label>
-                    <input type="text" class="form-control" id="store" placeholder="Rite Aid">
-                </div>
-                <div class="form-group">
-                    <label for="beer">Beer:</label>
-                    <input type="text" class="form-control" id="beer" placeholder="Coors Light">
-                </div>
-                <div class="form-group">
-                    <div class="radio" style="height: 40px;">
-                        <label><input type="radio" name="quantity" id="quantity" value="12"> 12-pack</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="quantity" id="quantity" value="30"> 30-pack</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input type="number" step=".01" class="form-control" id="price" placeholder="16.69">
-                </div>
-                <button type="submit" id="submit-update-beer">Submit</button>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter By<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Cost</a></li>
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Beer</a></li>
+            </ul>
+        </div>
+
+
+        <div class="table" style="width: 80%;">
+            <div class="table-container">
+                <h1 class="text-center" style="margin: auto;padding-bottom: 10px;background: white; width: 20%"><u>12 Packs</u></h1>
+                <table id="brews-table-12" class="table">
+                    <thead>
+                        <th>Cost</th>
+                        <th>Brand</th>
+                        <th>Store Name</th>
+                        <th>Time Reported</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button class="btn" id="show-12" value="hide">Show more</button>
+
             </div>
-        </form>
+            <div class="table-container">
+                <h1 class="text-center" style="margin: auto;padding-bottom: 10px;background: white; width: 20%"><u>30 Packs</u></h1>
+                <table id="brews-table-30" class="table">
+                    <thead>
+                        <th>Cost</th>
+                        <th>Brand</th>
+                        <th>Store Name</th>
+                        <th>Time Reported</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <button class="btn" id="show-30" value="hide">Show more</button>
+            </div>
+        </div>
+
+        <div class="card" id="my_popup" style="width: 40%; padding: 15px; border-radius: 10px;">
+            <form id="update-submit" class="update-submit">
+                <div class="card-block">
+                    <h4 class="card-title">Update Beer Price</h4>
+                    <div class="form-group">
+                        <label for="store">Store:</label>
+                        <input type="text" class="form-control" id="store" placeholder="Rite Aid">
+                    </div>
+                    <div class="form-group">
+                        <label for="beer">Beer:</label>
+                        <input type="text" class="form-control" id="beer" placeholder="Coors Light">
+                    </div>
+                    <div class="form-group">
+                        <div class="radio" style="height: 40px;">
+                            <label><input type="radio" name="quantity" id="quantity" value="12"> 12-pack</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="quantity" id="quantity" value="30"> 30-pack</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" step=".01" class="form-control" id="price" placeholder="16.69">
+                    </div>
+                    <button type="submit" id="submit-update-beer">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 
