@@ -8,13 +8,7 @@ $(document).ready(function () {
     });
 
     $("#submit-update-beer").click(function (event) {
-        data = {
-            storeName: $("#store").val(),
-            name: $("#beer").val(),
-            quantity: $("input[name='quantity']:checked").val(),
-            price: (Number($("#price").val())).toFixed(2)
-        };
-        handleUpdate(data);
+        handleUpdate();
         event.preventDefault();
     });
 });
@@ -67,8 +61,13 @@ function buildTable(quantity) {
     });
 }
 
-function handleUpdate(data) {
-    console.log(data);
+function handleUpdate() {
+    var data = {
+        storeName: $("#store").val(),
+        name: $("#beer").val(),
+        quantity: $("input[name='quantity']:checked").val(),
+        price: (Number($("#price").val())).toFixed(2)
+    };
     $.ajax({
         url: API_URL + 'update-beer',
         type: 'POST',
