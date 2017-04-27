@@ -6,9 +6,7 @@ import java.util.Map;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
@@ -27,8 +25,6 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 
 	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
 			.withRegion(Regions.US_WEST_2);
-
-	private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
 	public List<Beer> handleRequest(Object request, Context context) {
 		ArrayList<Beer> beers = new ArrayList<Beer>();
