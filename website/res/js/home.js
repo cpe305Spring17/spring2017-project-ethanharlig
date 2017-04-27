@@ -1,9 +1,10 @@
 $(document).ready(function () {
     getCheapest();
 
-    $("#update-price").on("click", function () {
-        alert("Nice");
-    })
+    $("#my_popup").popup({
+        transition: 'all 0.7s'
+    });
+
 });
 
 
@@ -17,6 +18,7 @@ function getCheapest() {
             } else {
                 response.forEach(function (oneQuantity) {
                     var quantity = oneQuantity[0].quantity;
+                    var ndx = 0;
                     oneQuantity.forEach(function (entry) {
                         var tr = "<tr>";
                         tr += "<td>$" + entry.price + "</td>";
@@ -25,6 +27,7 @@ function getCheapest() {
                         tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
                         tr += "</tr>";
                         $("#brews-table-" + entry.quantity + " tbody").append(tr);
+                        ndx += 1;
                     });
                     buildTable(quantity);
                 });

@@ -12,12 +12,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
     <script src="/res/js/home.js"></script>
 </head>
 
 <body>
     <div style="margin: 15px;">
-        <button id="update-price" class="btn btn-primary">Update a beer price</button>
+        <button id="update-price" class="my_popup_open">Update a beer price</button>
     </div>
 
     <!--
@@ -62,7 +63,7 @@
         </div>
     </div>
 
-    <div class="card" style="width: 40rem; margin: auto;">
+    <div class="card" id="my_popup" style="width: 40%; padding: 15px; border-radius: 10px;">
         <form class="update-submit">
             <div class="card-block">
                 <h4 class="card-title">Update Beer Price</h4>
@@ -86,11 +87,10 @@
                     <label for="price">Price:</label>
                     <input type="number" class="form-control" id="price" placeholder="16.69">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button id="submit-update-beer" class="my_popup_close">Submit</button>
             </div>
         </form>
     </div>
-
 </body>
 
 </html>
