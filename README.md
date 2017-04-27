@@ -29,7 +29,7 @@ Users can view the stores around them and check the cost of how much different b
         - [ ] Get user location
         - [ ] SSL certificate
         - [ ] Backend to calculate distance between store and user
-- [ ] Location of store
+- Location of store
     - [ ] Google Maps API
         - [ ] Geolocator
         - [ ] Autofill
