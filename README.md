@@ -8,4 +8,36 @@ Crowdsource the best beer deals near you (_currently have support for San Luis O
 
 Users can view the stores around them and check the cost of how much different beer costs at that store. 
 
+- [ ] Users
+    - [x] Upvote and down vote reports
+        - [ ] Down vote threshold causes deletion
+    - Profile
+        - Picture?
+        - Name
+        - Username
+        - Password
+        - Reputation
+            - Number of up votes - down votes
+        - Badges?
+- Filter by
+    - Store(s)
+        - Support to only filter by one store or many stores
+    - Beer(s)
+        - Support to only filter by one beer brand or many beer brands
+    - Price per beer
+    - Distance
+        - Get user location
+        - SSL certificate
+        - Backend to calculate distance between store and user
+- Location of store
+    - Google Maps API
+        - Geolocator
+        - Autofill
+    - Store location
+        - Parse only store name
+        - Store whole location in “stores” db
+
+
+
+
 <sub>Build may show as errored because I am not uploading my Credentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
