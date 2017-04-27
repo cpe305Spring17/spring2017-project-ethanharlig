@@ -8,34 +8,35 @@ Crowdsource the best beer deals near you (_currently have support for San Luis O
 
 Users can view the stores around them and check the cost of how much different beer costs at that store. 
 
-- [ ] Users
-    - [x] Upvote and down vote reports
+- Users
+    - [ ] Upvote and downvote user updates
         - [ ] Down vote threshold causes deletion
-    - Profile
-        - Picture?
-        - Name
-        - Username
-        - Password
-        - Reputation
-            - Number of up votes - down votes
-        - Badges?
+    - [ ] Profile
+        - [ ] Name
+        - [ ] Username
+        - [ ] Password
+        - [ ] Reputation
+            - Number of up votes minus down votes
+        - [ ] Badges (maybe)
+        - [ ] Picture (maybe)
 - Filter by
-    - Store(s)
-        - Support to only filter by one store or many stores
-    - Beer(s)
-        - Support to only filter by one beer brand or many beer brands
-    - Price per beer
-    - Distance
-        - Get user location
-        - SSL certificate
-        - Backend to calculate distance between store and user
-- Location of store
-    - Google Maps API
-        - Geolocator
-        - Autofill
-    - Store location
-        - Parse only store name
-        - Store whole location in “stores” db
+    - [ ] Store(s)
+        - [ ] Support to only filter by one store or many stores
+    - [ ] Beer(s)
+        - [ ] Support to only filter by one beer brand or many beer brands
+    - [ ] Price per beer
+    - [ ] Distance (maybe)
+        - [ ] Get user location
+        - [ ] SSL certificate
+        - [ ] Backend to calculate distance between store and user
+- [ ] Location of store
+    - [ ] Google Maps API
+        - [ ] Geolocator
+        - [ ] Autofill
+    - [ ] Store location
+        - [ ] Parse only store name
+        - [ ] Store whole location in “stores” db
+
 
 
 
