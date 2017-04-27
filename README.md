@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig.svg?branch=master)](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig) [<sub>disclaimer</sub>](#disclaimer)
+[![Build Status](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig.svg?branch=master)](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig)   [disclaimer>](#disclaimer)
 
 ![Budget Brews](website/res/img/logo.png)
 
