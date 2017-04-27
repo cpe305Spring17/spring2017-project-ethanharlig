@@ -22,7 +22,7 @@ function getCheapest() {
                         tr += "</tr>";
                         $("#brews-table-" + entry.quantity + " tbody").append(tr);
                     });
-                    toggleButton(quantity);
+                    buildTable(quantity);
                 });
             }
         }
@@ -30,10 +30,20 @@ function getCheapest() {
 
 }
 
-function toggleButton(quantity) {
+function buildTable(quantity) {
     $("#brews-table-" + quantity + " > tbody > tr").hide().slice(0, 3).show();
+
     $("#show-" + quantity).on("click", function () {
-        $("tbody > tr", $(this).prev()).show();
-        $("#show-" + quantity).html("Show fewer");
+        if ($(this).attr("value") == "hide") {
+            $("tbody > tr", $(this).prev()).show();
+            $("#show-" + quantity).html("Show fewer");
+            $("#show-" + quantity).val("show");
+        } else {
+            $("tbody > tr", $(this).prev()).hide();
+            $("#show-" + quantity).html("Show more");
+            $("#show-" + quantity).val("hide");
+
+            $("#brews-table-" + quantity + " > tbody > tr").hide().slice(0, 3).show();
+        }
     });
 }
