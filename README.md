@@ -42,6 +42,8 @@ Users can view the stores around them and check the cost of how much different b
         - [ ] Store whole location in “stores” db
 - API itself
    - [ ] Return response codes for each Lambda function
+   - [ ] Add DBAccess package for data access layer
+   - [ ] Add history to beer prices and maybe show graphs over time to see when certain beers are cheapest and how their price fluctuates
 
 &nbsp;
 &nbsp;

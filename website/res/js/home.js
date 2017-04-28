@@ -7,7 +7,7 @@ $(document).ready(function () {
     getCheapest();
 
     $("#my_popup").popup({
-        transition: 'all 0.7s'
+        transition: 'all 0.3s'
     });
 
     $("#submit-update-beer").click(function (event) {
