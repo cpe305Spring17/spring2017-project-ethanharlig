@@ -1,8 +1,9 @@
 var API_URL = 'https://s7pc06oh92.execute-api.us-west-2.amazonaws.com/test/';
 
 $(document).ready(function () {
-    //  party mode below
-    //  createPartyBackground();
+    //  party mode below!
+    //    createPartyBackground();
+
     getCheapest();
 
     $("#my_popup").popup({
