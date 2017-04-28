@@ -40,10 +40,12 @@ Users can view the stores around them and check the cost of how much different b
     - [ ] Store location
         - [ ] Parse only store name
         - [ ] Store whole location in “stores” db
+- API itself
+   - [ ] Return response codes for each Lambda function
 
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
 
 ###### Disclaimer
 <sub>Build may show as errored because I am not uploading my Credentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
