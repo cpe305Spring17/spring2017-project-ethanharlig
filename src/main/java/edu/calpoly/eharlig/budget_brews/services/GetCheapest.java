@@ -52,8 +52,8 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 				cheapest = current;
 			}
 
-			if (current.getPrice() < cheapest.getPrice() || (current.getPrice() == cheapest.getPrice()
-					&& current.getTimestamp() > cheapest.getTimestamp())) {
+			if (current.getPrice() < cheapest.getPrice() || (Double.compare(current.getPrice(), cheapest.getPrice()) == 0)
+					&& current.getTimestamp() > cheapest.getTimestamp()) {
 				cheapest = current;
 			}
 		}
