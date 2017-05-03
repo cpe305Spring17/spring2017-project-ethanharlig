@@ -23,7 +23,7 @@ function getCheapest() {
         type: 'GET',
         success: function (response) {
             if (response == null) {
-                alert("Dang");
+                console.log("Dang");
             } else {
                 response.forEach(function (oneQuantity) {
                     var quantity = oneQuantity[0].quantity;
@@ -78,7 +78,7 @@ function handleUpdate() {
         success: function (response) {
             console.log(response);
             if (response != null) {
-                alert("failed");
+                console.log("failed");
             } else {
                 closeWindow();
             }
