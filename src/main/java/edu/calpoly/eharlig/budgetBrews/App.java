@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budget_brews;
+package edu.calpoly.eharlig.budgetBrews;
 
 /**
  * Hello world!

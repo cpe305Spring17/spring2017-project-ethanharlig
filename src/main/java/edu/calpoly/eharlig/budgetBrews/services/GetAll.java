@@ -1,6 +1,8 @@
-package edu.calpoly.eharlig.budget_brews.services;
+package edu.calpoly.eharlig.budgetBrews.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +15,9 @@ import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budget_brews.models.Beer;
+import edu.calpoly.eharlig.budgetBrews.models.Beer;
 
-public class GetCheapest implements RequestHandler<Object, List<Beer>> {
+public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
 	// these are commented so that travis can pass
 	// need to think of a way to keep credentials here but have travis pass
 //	private static String AWS_KEY = new Credentials().getAwsAccessKey();
@@ -26,20 +28,21 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
 			.withRegion(Regions.US_WEST_2);
 
-	public List<Beer> handleRequest(Object request, Context context) {
-		ArrayList<Beer> beers = new ArrayList<Beer>();
-		beers.add(getCheapestQuantity(12));
-		beers.add(getCheapestQuantity(30));
+	public List<ArrayList<Beer>> handleRequest(Object request, Context context) {
+		List<ArrayList<Beer>> beers = new ArrayList<ArrayList<Beer>>();
+		beers.add(getAllQuantity(12));
+		beers.add(getAllQuantity(30));
 
 		return beers;
 	}
 
-	private Beer getCheapestQuantity(int quantity) {
+	private ArrayList<Beer> getAllQuantity(int quantity) {
 		ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
 		ScanResult result = client.scan(scanRequest);
+		
+		ArrayList<Beer> allBeers = new ArrayList<Beer>();
 
-		Beer cheapest = null;
 		for (Map<String, AttributeValue> item : result.getItems()) {
 			Beer current = new Beer();
 			current.setName(item.get("name").getS());
@@ -47,18 +50,17 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 			current.setStoreName(item.get("storeName").getS());
 			current.setTimestamp(Long.parseLong(item.get("timestamp").getN()));
 			current.setQuantity(quantity);
-
-			if (cheapest == null) {
-				cheapest = current;
-			}
-
-			if (current.getPrice() < cheapest.getPrice() || (Double.compare(current.getPrice(), cheapest.getPrice()) == 0)
-					&& current.getTimestamp() > cheapest.getTimestamp()) {
-				cheapest = current;
-			}
+			
+			allBeers.add(current);
 		}
+		
+		Collections.sort(allBeers, new Comparator<Beer>() {
+			public int compare(Beer b1, Beer b2) {
+				return Double.compare(b1.getPrice(), b2.getPrice());
+			}
+		});
 
-		return cheapest;
+		return allBeers;
 	}
 
 }

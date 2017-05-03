@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budget_brews.services;
+package edu.calpoly.eharlig.budgetBrews.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budget_brews.models.Beer;
-import edu.calpoly.eharlig.budget_brews.models.BeerHistory;
+import edu.calpoly.eharlig.budgetBrews.models.Beer;
+import edu.calpoly.eharlig.budgetBrews.models.BeerHistory;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 	// these are commented so that travis can pass

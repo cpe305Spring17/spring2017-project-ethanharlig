@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budget_brews.models;
+package edu.calpoly.eharlig.budgetBrews.models;
 
 public class User {
 	private String username;
