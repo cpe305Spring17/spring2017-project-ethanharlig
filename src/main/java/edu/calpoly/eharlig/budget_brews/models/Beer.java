@@ -1,6 +1,7 @@
 package edu.calpoly.eharlig.budget_brews.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Beer {
 	private String name;
@@ -11,7 +12,7 @@ public class Beer {
 	private ArrayList<BeerHistory> history;
 	
 	public Beer() {
-		this.history = new ArrayList<BeerHistory>();
+		this.history = new ArrayList();
 	}
 
 	public String getName() {
@@ -51,9 +52,9 @@ public class Beer {
 		this.timestamp = timestamp;
 	}
 
-	public ArrayList<BeerHistory> getHistory() {
+	public List<BeerHistory> getHistory() {
 		if (history == null)
-			return new ArrayList<BeerHistory>();
+			return new ArrayList();
 		return history;
 	}
 
