@@ -29,7 +29,7 @@ public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
 			.withRegion(Regions.US_WEST_2);
 
 	public List<ArrayList<Beer>> handleRequest(Object request, Context context) {
-		List<ArrayList<Beer>> beers = new ArrayList<ArrayList<Beer>>();
+		List<ArrayList<Beer>> beers = new ArrayList();
 		beers.add(getAllQuantity(12));
 		beers.add(getAllQuantity(30));
 

@@ -27,7 +27,7 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 			.withRegion(Regions.US_WEST_2);
 
 	public List<Beer> handleRequest(Object request, Context context) {
-		ArrayList<Beer> beers = new ArrayList<Beer>();
+		ArrayList<Beer> beers = new ArrayList();
 		beers.add(getCheapestQuantity(12));
 		beers.add(getCheapestQuantity(30));
 
