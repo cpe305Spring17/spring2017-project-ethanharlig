@@ -18,49 +18,49 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import edu.calpoly.eharlig.budgetBrews.models.Beer;
 
 public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
-	// these are commented so that travis can pass
-	// need to think of a way to keep credentials here but have travis pass
-//	private static String AWS_KEY = new Credentials().getAwsAccessKey();
-//	private static String SECRET_KEY = new Credentials().getAwsSecretKey();
-	 private static String AWS_KEY;
-	 private static String SECRET_KEY;
+  // these are commented so that travis can pass
+  // need to think of a way to keep credentials here but have travis pass
+  // private static String AWS_KEY = new Credentials().getAwsAccessKey();
+  // private static String SECRET_KEY = new Credentials().getAwsSecretKey();
+  private static String AWS_KEY;
+  private static String SECRET_KEY;
 
-	private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(new BasicAWSCredentials(AWS_KEY, SECRET_KEY))
-			.withRegion(Regions.US_WEST_2);
+  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
+      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
-	public List<ArrayList<Beer>> handleRequest(Object request, Context context) {
-		List<ArrayList<Beer>> beers = new ArrayList();
-		beers.add(getAllQuantity(12));
-		beers.add(getAllQuantity(30));
+  public List<ArrayList<Beer>> handleRequest(Object request, Context context) {
+    List<ArrayList<Beer>> beers = new ArrayList();
+    beers.add(getAllQuantity(12));
+    beers.add(getAllQuantity(30));
 
-		return beers;
-	}
+    return beers;
+  }
 
-	private ArrayList<Beer> getAllQuantity(int quantity) {
-		ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
+  private ArrayList<Beer> getAllQuantity(int quantity) {
+    ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
-		ScanResult result = client.scan(scanRequest);
-		
-		ArrayList<Beer> allBeers = new ArrayList<Beer>();
+    ScanResult result = client.scan(scanRequest);
 
-		for (Map<String, AttributeValue> item : result.getItems()) {
-			Beer current = new Beer();
-			current.setName(item.get("name").getS());
-			current.setPrice(Double.parseDouble(item.get("price").getN()));
-			current.setStoreName(item.get("storeName").getS());
-			current.setTimestamp(Long.parseLong(item.get("timestamp").getN()));
-			current.setQuantity(quantity);
-			
-			allBeers.add(current);
-		}
-		
-		Collections.sort(allBeers, new Comparator<Beer>() {
-			public int compare(Beer b1, Beer b2) {
-				return Double.compare(b1.getPrice(), b2.getPrice());
-			}
-		});
+    ArrayList<Beer> allBeers = new ArrayList<Beer>();
 
-		return allBeers;
-	}
+    for (Map<String, AttributeValue> item : result.getItems()) {
+      Beer current = new Beer();
+      current.setName(item.get("name").getS());
+      current.setPrice(Double.parseDouble(item.get("price").getN()));
+      current.setStoreName(item.get("storeName").getS());
+      current.setTimestamp(Long.parseLong(item.get("timestamp").getN()));
+      current.setQuantity(quantity);
+
+      allBeers.add(current);
+    }
+
+    Collections.sort(allBeers, new Comparator<Beer>() {
+      public int compare(Beer b1, Beer b2) {
+        return Double.compare(b1.getPrice(), b2.getPrice());
+      }
+    });
+
+    return allBeers;
+  }
 
 }
