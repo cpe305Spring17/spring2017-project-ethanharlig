@@ -25,10 +25,10 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
   private static String AWS_KEY;
   private static String SECRET_KEY;
 
-  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
-
-  private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
+//  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
+//      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
+//
+//  private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
   private static String PRICE = "price";
   private static String STORE_NAME = "storeName";
@@ -45,9 +45,10 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     // TODO add lowest price to table and set history with ordered
     // timestamps
 
-    Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
+//    Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
 
-    Item item = table.getItem("name", beer.getName());
+//    Item item = table.getItem("name", beer.getName());
+    Item item = new Item();
 
     if (item != null) {
       List<BeerHistory> bHistory = new ArrayList();
@@ -81,7 +82,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     toUpdate.withLong(TIMESTAMP, System.currentTimeMillis());
     // toUpdate.withList("history", bHistory);
 
-    table.putItem(toUpdate);
+//    table.putItem(toUpdate);
 
   }
 
