@@ -85,15 +85,17 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 
   }
 
-  private static void putItemStore(Beer beer) {
-    Table table = dynamoDB.getTable(beer.getStoreName().replaceAll(" ", "-").toLowerCase());
+  public static double putItemStore(Beer beer) {
+//    Table table = dynamoDB.getTable(beer.getStoreName().replaceAll(" ", "-").toLowerCase());
 
     Item item = new Item();
     item.withPrimaryKey("name", beer.getName() + "-" + beer.getQuantity());
     item.withDouble(PRICE, beer.getPrice());
     item.withLong(TIMESTAMP, System.currentTimeMillis());
 
-    table.putItem(item);
+//    table.putItem(item);
+    
+    return beer.getPrice();
 
   }
 
