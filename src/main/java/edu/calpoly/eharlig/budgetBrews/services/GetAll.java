@@ -35,7 +35,7 @@ public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
     return beers;
   }
 
-  private ArrayList<Beer> getAllQuantity(int quantity) {
+  public ArrayList<Beer> getAllQuantity(int quantity) {
     ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
     ScanResult result = client.scan(scanRequest);
