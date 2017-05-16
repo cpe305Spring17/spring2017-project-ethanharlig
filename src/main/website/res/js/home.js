@@ -16,15 +16,25 @@ $(document).ready(function () {
         transition: 'all 0.3s'
     });
 
-    $("#submit-update-beer").click(function (event) {
+    $("#submit-update-beer").click(function (ev) {
         handleUpdate();
-        event.preventDefault();
+        ev.preventDefault();
     });
 
-    $("#submit-sign-in").click(function (event) {
+    $("#submit-sign-in").click(function (ev) {
         authenticateUser();
-        event.preventDefault();
-    })
+        ev.preventDefault();
+    });
+
+    $("#filter-store").click(function (ev) {
+        displayStores();
+        ev.preventDefault();
+    });
+
+    $("#filter-beer-name").click(function (ev) {
+        displayBeers();
+        ev.preventDefault();
+    });
 
 });
 
@@ -151,4 +161,28 @@ function closeUpdateWindow() {
 
 function closeSignInWindow() {
     $("#sign_in_popup").popup("hide");
+}
+
+
+function displayStores() {
+    $.ajax({
+        url: API_URL + 'get-all-stores',
+        type: 'GET',
+        success: function (response) {
+            console.log(response);
+        }
+    });
+
+}
+
+
+function displayBeers() {
+    $.ajax({
+        url: API_URL + 'get-all-beer-names',
+        type: 'GET',
+        success: function (response) {
+            console.log(response);
+        }
+    });
+
 }
