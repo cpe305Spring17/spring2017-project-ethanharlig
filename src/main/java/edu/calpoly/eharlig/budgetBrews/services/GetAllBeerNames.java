@@ -13,11 +13,13 @@ import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budgetBrews.util.Credentials;
+//import edu.calpoly.eharlig.budgetBrews.util.Credentials;
 
 public class GetAllBeerNames implements RequestHandler<Object, List<String>> {
-  private static String AWS_KEY = Credentials.getAwsKey();
-  private static String SECRET_KEY = Credentials.getSecretKey();
+//  private static String AWS_KEY = Credentials.getAwsKey();
+//  private static String SECRET_KEY = Credentials.getSecretKey();
+  static String AWS_KEY = "";
+  static String SECRET_KEY = "";
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
