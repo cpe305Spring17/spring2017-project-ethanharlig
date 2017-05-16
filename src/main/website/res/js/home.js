@@ -3,10 +3,16 @@ var API_URL = 'https://s7pc06oh92.execute-api.us-west-2.amazonaws.com/test/';
 $(document).ready(function () {
     //  party mode below!
     //    createPartyBackground();
-
     getCheapest();
+    if (localStorage.getItem("username") != null) {
+        console.log("hey");
+    }
 
-    $("#my_popup").popup({
+    $("#update_popup").popup({
+        transition: 'all 0.3s'
+    });
+
+    $("#sign_in_popup").popup({
         transition: 'all 0.3s'
     });
 
@@ -14,7 +20,14 @@ $(document).ready(function () {
         handleUpdate();
         event.preventDefault();
     });
+
+    $("#submit-sign-in").click(function (event) {
+        authenticateUser();
+        event.preventDefault();
+    })
+
 });
+
 
 
 function getCheapest() {
@@ -26,6 +39,8 @@ function getCheapest() {
                 console.log("Dang");
             } else {
                 response.forEach(function (oneQuantity) {
+                    if (oneQuantity.length == 0)
+                        return;
                     var quantity = oneQuantity[0].quantity;
                     $("#brews-table-" + quantity + " tbody").empty();
                     oneQuantity.forEach(function (entry) {
@@ -63,6 +78,7 @@ function buildTable(quantity) {
     });
 }
 
+
 function handleUpdate() {
     var data = {
         storeName: $("#store").val(),
@@ -80,15 +96,14 @@ function handleUpdate() {
             if (response != null) {
                 console.log("failed");
             } else {
-                closeWindow();
+                closeUpdateWindow();
             }
         }
     });
 }
 
-function closeWindow() {
-    $("#my_popup").popup("hide");
-}
+
+
 
 function createPartyBackground() {
     for (var x = -1; x < $(document).width() / 140; x += 1) {
@@ -102,4 +117,38 @@ function createPartyBackground() {
         }
     }
 
+}
+
+
+function authenticateUser() {
+    var data = {
+        username: $("#username").val(),
+        password: $("#password").val(),
+    };
+    $.ajax({
+        url: API_URL + 'authenticate-user',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            console.log(response);
+            if (!response) {
+                alert("Invalid username or password.")
+            } else {
+                localStorage.setItem("username", $("#username").val());
+                closeSignInWindow();
+            }
+        }
+    });
+
+}
+
+
+function closeUpdateWindow() {
+    $("#update_popup").popup("hide");
+}
+
+
+function closeSignInWindow() {
+    $("#sign_in_popup").popup("hide");
 }

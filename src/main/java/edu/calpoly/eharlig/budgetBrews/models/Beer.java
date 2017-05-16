@@ -10,6 +10,8 @@ public class Beer {
 	private String storeName;
 	private long timestamp;
 	private ArrayList<BeerHistory> history;
+	private int upvotes;
+	private int downvotes;
 	
 	public Beer() {
 		this.history = new ArrayList();
@@ -61,5 +63,21 @@ public class Beer {
 	public void setHistory(ArrayList<BeerHistory> history) {
 		this.history = history;
 	}
+
+  public int getUpvotes() {
+    return upvotes;
+  }
+
+  public void setUpvotes(int upvotes) {
+    this.upvotes = upvotes;
+  }
+
+  public int getDownvotes() {
+    return downvotes;
+  }
+
+  public void setDownvotes(int downvotes) {
+    this.downvotes = downvotes;
+  }
 
 }
