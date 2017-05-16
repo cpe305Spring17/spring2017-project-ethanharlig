@@ -51,23 +51,28 @@ function getCheapest() {
                 response.forEach(function (oneQuantity) {
                     if (oneQuantity.length == 0)
                         return;
-                    var quantity = oneQuantity[0].quantity;
-                    $("#brews-table-" + quantity + " tbody").empty();
-                    oneQuantity.forEach(function (entry) {
-                        var tr = "<tr>";
-                        tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
-                        tr += "<td>" + entry.name + "</td>";
-                        tr += "<td>" + entry.storeName + "</td>";
-                        tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
-                        tr += "</tr>";
-                        $("#brews-table-" + entry.quantity + " tbody").append(tr);
-                    });
-                    buildTable(quantity);
+                    createTrs(oneQuantity);
                 });
             }
         }
     });
 
+}
+
+function createTrs(oneQuantity) {
+    console.log(oneQuantity);
+    var quantity = oneQuantity[0].quantity;
+    $("#brews-table-" + quantity + " tbody").empty();
+    oneQuantity.forEach(function (entry) {
+        var tr = "<tr>";
+        tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
+        tr += "<td>" + entry.name + "</td>";
+        tr += "<td>" + entry.storeName + "</td>";
+        tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
+        tr += "</tr>";
+        $("#brews-table-" + entry.quantity + " tbody").append(tr);
+    });
+    buildTable(quantity);
 }
 
 function buildTable(quantity) {
@@ -169,7 +174,20 @@ function displayStores() {
         url: API_URL + 'get-all-stores',
         type: 'GET',
         success: function (response) {
-            console.log(response);
+            response.forEach(function (store) {
+                $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store + "<br>");
+            });
+            $("#options").append("<button type='submit' id='submit-store'>Filter by these stores!</button>");
+            $("#options-container").show();
+            $("#submit-store").click(function (ev) {
+                var selected = [];
+                $("#options-container input:checked").each(function () {
+                    selected.push($(this).attr('value'));
+                });
+                console.log(selected);
+                filterStores(selected);
+                ev.preventDefault();
+            });
         }
     });
 
@@ -182,6 +200,63 @@ function displayBeers() {
         type: 'GET',
         success: function (response) {
             console.log(response);
+        }
+    });
+
+}
+
+
+function filterStores(stores) {
+    var data = {};
+
+    var ndx = 0;
+    stores.forEach(function (store) {
+        data[ndx.toString()] = store;
+        ndx += 1;
+    });
+
+    console.log(data);
+
+    $.ajax({
+        url: API_URL + 'filter-stores',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response == null) {
+                console.log("Dang");
+            } else {
+                $("#brews-table-12 tbody").empty();
+                $("#brews-table-30 tbody").empty();
+                response.forEach(function (oneQuantity) {
+                    if (oneQuantity == null || oneQuantity.length == 0)
+                        return;
+                    createTrs(oneQuantity);
+                });
+            }
+        }
+    });
+}
+
+
+function filterBeers() {
+    var data = {};
+
+    $.ajax({
+        url: API_URL + 'filter-stores',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response == null) {
+                console.log("Dang");
+            } else {
+                response.forEach(function (oneQuantity) {
+                    if (oneQuantity == null || oneQuantity.length == 0)
+                        return;
+                    createTrs(oneQuantity);
+                });
+            }
         }
     });
 
