@@ -16,9 +16,8 @@ Users can view the stores around them and check the cost of how much different b
     - [ ] Upvote and downvote user updates
         - [ ] Down vote threshold causes deletion
     - [ ] Profile
-        - [ ] Name
-        - [ ] Username
-        - [ ] Password
+        - [x] Username
+        - [x] Password
         - [ ] Reputation
             - Number of up votes minus down votes
         - [ ] Badges (maybe)
