@@ -60,10 +60,10 @@ function getCheapest() {
 }
 
 function createTrs(oneQuantity) {
-    console.log(oneQuantity);
     var quantity = oneQuantity[0].quantity;
     $("#brews-table-" + quantity + " tbody").empty();
     oneQuantity.forEach(function (entry) {
+        console.log(entry);
         var tr = "<tr>";
         tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
         tr += "<td>" + entry.name + "</td>";
@@ -72,6 +72,7 @@ function createTrs(oneQuantity) {
         tr += "</tr>";
         $("#brews-table-" + entry.quantity + " tbody").append(tr);
     });
+
     buildTable(quantity);
 }
 
@@ -174,8 +175,10 @@ function displayStores() {
         url: API_URL + 'get-all-stores',
         type: 'GET',
         success: function (response) {
+            var ndx = 0;
             response.forEach(function (store) {
                 $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store + "<br>");
+                ndx += 1;
             });
             $("#options").append("<button type='submit' id='submit-store'>Filter by these stores!</button>");
             $("#options-container").show();
@@ -199,7 +202,20 @@ function displayBeers() {
         url: API_URL + 'get-all-beer-names',
         type: 'GET',
         success: function (response) {
-            console.log(response);
+            response.forEach(function (beerName) {
+                $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName + "<br>");
+            });
+            $("#options").append("<button type='submit' id='submit-beer'>Filter by these beers!</button>");
+            $("#options-container").show();
+            $("#submit-beer").click(function (ev) {
+                var selected = [];
+                $("#options-container input:checked").each(function () {
+                    selected.push($(this).attr('value'));
+                });
+                console.log(selected);
+                filterBeers(selected);
+                ev.preventDefault();
+            });
         }
     });
 
@@ -239,11 +255,17 @@ function filterStores(stores) {
 }
 
 
-function filterBeers() {
+function filterBeers(beers) {
     var data = {};
 
+    var ndx = 0;
+    beers.forEach(function (beerName) {
+        data[ndx.toString()] = beerName;
+        ndx += 1;
+    });
+
     $.ajax({
-        url: API_URL + 'filter-stores',
+        url: API_URL + 'filter-beers',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -251,6 +273,8 @@ function filterBeers() {
             if (response == null) {
                 console.log("Dang");
             } else {
+                $("#brews-table-12 tbody").empty();
+                $("#brews-table-30 tbody").empty();
                 response.forEach(function (oneQuantity) {
                     if (oneQuantity == null || oneQuantity.length == 0)
                         return;
