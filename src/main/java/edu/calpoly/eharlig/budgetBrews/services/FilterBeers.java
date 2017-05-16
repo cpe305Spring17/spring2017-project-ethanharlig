@@ -18,9 +18,6 @@ public class FilterBeers implements RequestHandler<Map<String, String>, ArrayLis
   static String AWS_KEY = "";
   static String SECRET_KEY = "";
 
-  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
-
   public ArrayList<ArrayList> handleRequest(Map<String, String> request, Context context) {
     List<Beer> beer12 = new GetAll().getAllQuantity(12);
     List<Beer> beer30 = new GetAll().getAllQuantity(30);
