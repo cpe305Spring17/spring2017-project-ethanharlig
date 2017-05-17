@@ -221,8 +221,9 @@ function displayBeers() {
 
 
 function filterBy(input, toFilterBy) {
-    var filter = 'filter-' + toFilterBy;
-    var data = {};
+    var data = {
+        filter: toFilterBy
+    };
 
     var ndx = 0;
     input.forEach(function (eachInput) {
@@ -231,7 +232,7 @@ function filterBy(input, toFilterBy) {
     });
 
     $.ajax({
-        url: API_URL + filter,
+        url: API_URL + 'filter',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
