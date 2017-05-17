@@ -30,6 +30,7 @@ public class AddUser implements RequestHandler<User, PutItemOutcome> {
     Item item = new Item();
     item.withPrimaryKey("username", request.getUsername());
     item.withString("password", request.getPassword());
+    item.withString("email", request.getEmail());
     return table.putItem(item);
   }
 
