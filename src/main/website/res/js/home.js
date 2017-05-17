@@ -27,11 +27,13 @@ $(document).ready(function () {
     });
 
     $("#filter-store").click(function (ev) {
+        $("#options").empty();
         displayStores();
         ev.preventDefault();
     });
 
     $("#filter-beer-name").click(function (ev) {
+        $("#options").empty();
         displayBeers();
         ev.preventDefault();
     });
@@ -66,7 +68,6 @@ function createTrs(oneQuantity) {
     $("#brews-table-" + quantity + " tbody").empty();
 
     oneQuantity.forEach(function (entry) {
-        console.log(entry);
         var tr = "<tr>";
         tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
         tr += "<td>" + entry.name + "</td>";
@@ -111,7 +112,6 @@ function handleUpdate() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
-            console.log(response);
             if (response != null) {
                 console.log("failed");
             } else {
@@ -148,7 +148,6 @@ function authenticateUser() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
-            console.log(response);
             if (!response) {
                 alert("Invalid username or password.")
             } else {
@@ -188,7 +187,6 @@ function displayStores() {
                 $("#options-container input:checked").each(function () {
                     selected.push($(this).attr('value'));
                 });
-                console.log(selected);
                 filterBy(selected, 'stores');
                 ev.preventDefault();
             });
@@ -213,7 +211,6 @@ function displayBeers() {
                 $("#options-container input:checked").each(function () {
                     selected.push($(this).attr('value'));
                 });
-                console.log(selected);
                 filterBy(selected, 'beers');
                 ev.preventDefault();
             });
