@@ -23,10 +23,10 @@ Users can view the stores around them and check the cost of how much different b
         - [ ] Badges (maybe)
         - [ ] Picture (maybe)
 - Filter by
-    - [ ] Store(s)
-        - [ ] Support to only filter by one store or many stores
-    - [ ] Beer(s)
-        - [ ] Support to only filter by one beer brand or many beer brands
+    - [x] Store(s)
+        - [x] Support to only filter by one store or many stores
+    - [x] Beer(s)
+        - [x] Support to only filter by one beer brand or many beer brands
     - [ ] Price per beer
     - [ ] Distance (maybe)
         - [ ] Get user location
