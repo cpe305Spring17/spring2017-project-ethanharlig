@@ -24,7 +24,7 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
   public List<Beer> handleRequest(Object request, Context context) {
-    ArrayList<Beer> beers = new ArrayList();
+    ArrayList<Beer> beers = new ArrayList<>();
     beers.add(getCheapestQuantity(12));
     beers.add(getCheapestQuantity(30));
 

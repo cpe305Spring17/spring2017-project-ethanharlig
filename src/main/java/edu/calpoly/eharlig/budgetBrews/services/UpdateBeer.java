@@ -47,7 +47,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     Item item = table.getItem("name", beer.getName());
 
     if (item != null) {
-      List<BeerHistory> bHistory = new ArrayList();
+      List<BeerHistory> bHistory = new ArrayList<>();
 
       BeerHistory currentBeer = new BeerHistory();
       currentBeer.setPrice(item.getDouble(PRICE));

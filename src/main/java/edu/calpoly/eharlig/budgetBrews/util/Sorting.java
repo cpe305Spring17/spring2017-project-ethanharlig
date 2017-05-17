@@ -1,7 +1,6 @@
 package edu.calpoly.eharlig.budgetbrews.util;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
