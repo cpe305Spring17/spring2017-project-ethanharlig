@@ -1,14 +1,14 @@
 package edu.calpoly.eharlig.budgetBrews.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetBrews.models.Beer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import edu.calpoly.eharlig.budgetBrews.util.Sorting;
 
 
 public class FilterStores implements RequestHandler<Map<String, String>, List<List<Beer>>>{
@@ -38,18 +38,8 @@ public class FilterStores implements RequestHandler<Map<String, String>, List<Li
       eachBeer30.addAll(beers);
     }
 
-
-    Collections.sort(eachBeer12, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
-
-    Collections.sort(eachBeer30, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
+    eachBeer12 = Sorting.sort(eachBeer12);
+    eachBeer30 = Sorting.sort(eachBeer30);
     
     List<List<Beer>> byStore = new ArrayList<List<Beer>>();
 

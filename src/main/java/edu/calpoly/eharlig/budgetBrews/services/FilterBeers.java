@@ -10,6 +10,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetBrews.models.Beer;
+import edu.calpoly.eharlig.budgetBrews.util.Sorting;
 
 public class FilterBeers implements RequestHandler<Map<String, String>, List<List<Beer>>>{
 
@@ -17,10 +18,10 @@ public class FilterBeers implements RequestHandler<Map<String, String>, List<Lis
     List<Beer> beer12 = new GetAll().getAllQuantity(12);
     List<Beer> beer30 = new GetAll().getAllQuantity(30);
     
-    List<List<Beer>> byBeer12 = new ArrayList<List<Beer>>();
-    List<List<Beer>> byBeer30 = new ArrayList<List<Beer>>();
-    List<Beer> eachBeer12 = new ArrayList<Beer>();
-    List<Beer> eachBeer30 = new ArrayList<Beer>();
+    List<List<Beer>> byBeer12 = new ArrayList<>();
+    List<List<Beer>> byBeer30 = new ArrayList<>();
+    List<Beer> eachBeer12 = new ArrayList<>();
+    List<Beer> eachBeer30 = new ArrayList<>();
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
       byBeer12.add(filterBeer(beer12, entry.getValue()));
@@ -38,18 +39,8 @@ public class FilterBeers implements RequestHandler<Map<String, String>, List<Lis
       eachBeer30.addAll(beers);
     }
 
-
-    Collections.sort(eachBeer12, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
-
-    Collections.sort(eachBeer30, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
+    eachBeer12 = Sorting.sort(eachBeer12);
+    eachBeer30 = Sorting.sort(eachBeer30);
     
     List<List<Beer>> byBeer = new ArrayList<List<Beer>>();
 

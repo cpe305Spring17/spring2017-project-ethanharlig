@@ -29,7 +29,7 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
   public List<List<Beer>> handleRequest(Object request, Context context) {
-    List<List<Beer>> beers = new ArrayList<List<Beer>>();
+    List<List<Beer>> beers = new ArrayList<>();
     beers.add(getAllQuantity(12));
     beers.add(getAllQuantity(30));
 
