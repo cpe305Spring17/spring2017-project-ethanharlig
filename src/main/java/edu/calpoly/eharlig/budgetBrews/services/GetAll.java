@@ -56,11 +56,7 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
       allBeers.add(current);
     }
 
-    Collections.sort(allBeers, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
+    Collections.sort(allBeers, (Beer b1, Beer b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
 
     return allBeers;
   }

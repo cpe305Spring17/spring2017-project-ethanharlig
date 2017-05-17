@@ -14,7 +14,7 @@ public class Beer {
 	private int downvotes;
 	
 	public Beer() {
-		this.history = new ArrayList();
+		this.history = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -60,7 +60,7 @@ public class Beer {
 		return history;
 	}
 
-	public void setHistory(ArrayList<BeerHistory> history) {
+	public void setHistory(List<BeerHistory> history) {
 		this.history = history;
 	}
 

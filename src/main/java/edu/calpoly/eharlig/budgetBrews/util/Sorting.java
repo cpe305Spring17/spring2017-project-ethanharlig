@@ -10,14 +10,8 @@ public class Sorting {
   private Sorting() {}
   
   public static List<Beer> sort(List<Beer> beers) {
-    Collections.sort(beers, new Comparator<Beer>() {
-      public int compare(Beer b1, Beer b2) {
-        return Double.compare(b1.getPrice(), b2.getPrice());
-      }
-    });
-    
+    Collections.sort(beers, (Beer b1, Beer b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
     return beers;
-    
   }
 
 }
