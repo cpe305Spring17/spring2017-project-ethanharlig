@@ -1,10 +1,10 @@
-package edu.calpoly.eharlig.budgetBrews.util;
+package edu.calpoly.eharlig.budgetbrews.util;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import edu.calpoly.eharlig.budgetBrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.models.Beer;
 
 public class Sorting {
   public static List<Beer> sort(List<Beer> beers) {

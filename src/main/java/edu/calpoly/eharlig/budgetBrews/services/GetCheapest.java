@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetBrews.services;
+package edu.calpoly.eharlig.budgetbrews.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budgetBrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.models.Beer;
 
 public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 //  private static String AWS_KEY = Credentials.getAwsKey();

@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetBrews.models;
+package edu.calpoly.eharlig.budgetbrews.models;
 
 public class BeerHistory extends Beer {
 

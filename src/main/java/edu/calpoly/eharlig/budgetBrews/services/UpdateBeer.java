@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetBrews.services;
+package edu.calpoly.eharlig.budgetbrews.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budgetBrews.models.Beer;
-import edu.calpoly.eharlig.budgetBrews.models.BeerHistory;
+import edu.calpoly.eharlig.budgetbrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 //  private static String AWS_KEY = Credentials.getAwsKey();

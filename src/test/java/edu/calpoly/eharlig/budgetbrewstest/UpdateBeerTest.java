@@ -1,7 +1,7 @@
-package edu.calpoly.eharlig.budget_brews;
+package edu.calpoly.eharlig.budgetbrewstest;
 
-import edu.calpoly.eharlig.budgetBrews.models.Beer;
-import edu.calpoly.eharlig.budgetBrews.services.UpdateBeer;
+import edu.calpoly.eharlig.budgetbrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.services.UpdateBeer;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

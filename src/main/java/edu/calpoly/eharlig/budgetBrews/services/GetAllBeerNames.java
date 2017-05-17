@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetBrews.services;
+package edu.calpoly.eharlig.budgetbrews.services;
 
 import java.util.ArrayList;
 import java.util.List;

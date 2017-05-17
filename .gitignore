@@ -80,5 +80,5 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
 
-/src/main/java/edu/calpoly/eharlig/budgetBrews/util/Credentials.java
+/src/main/java/edu/calpoly/eharlig/budgetbrews/util/Credentials.java
 

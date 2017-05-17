@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetBrews.services;
+package edu.calpoly.eharlig.budgetbrews.services;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
@@ -11,7 +11,7 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import edu.calpoly.eharlig.budgetBrews.models.User;
+import edu.calpoly.eharlig.budgetbrews.models.User;
 
 public class AddUser implements RequestHandler<User, PutItemOutcome> {
 //  private static String AWS_KEY = Credentials.getAwsKey();
