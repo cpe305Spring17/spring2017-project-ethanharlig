@@ -22,8 +22,8 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
   // need to think of a way to keep credentials here but have travis pass
 //  private static String AWS_KEY = Credentials.getAwsKey();
 //  private static String SECRET_KEY = Credentials.getSecretKey();
-  static String AWS_KEY = "";
-  static String SECRET_KEY = "";
+  static final String AWS_KEY = "";
+  static final String SECRET_KEY = "";
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
@@ -41,7 +41,7 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
 
     ScanResult result = client.scan(scanRequest);
 
-    ArrayList<Beer> allBeers = new ArrayList<Beer>();
+    ArrayList<Beer> allBeers = new ArrayList<>();
 
     for (Map<String, AttributeValue> item : result.getItems()) {
       Beer current = new Beer();

@@ -18,8 +18,8 @@ import edu.calpoly.eharlig.budgetbrews.models.Beer;
 public class GetCheapest implements RequestHandler<Object, List<Beer>> {
 //  private static String AWS_KEY = Credentials.getAwsKey();
 //  private static String SECRET_KEY = Credentials.getSecretKey();
-  static String AWS_KEY = "";
-  static String SECRET_KEY = "";
+  static final String AWS_KEY = "";
+  static final String SECRET_KEY = "";
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 

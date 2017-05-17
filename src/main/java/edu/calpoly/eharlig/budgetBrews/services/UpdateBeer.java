@@ -20,17 +20,17 @@ import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 //  private static String AWS_KEY = Credentials.getAwsKey();
 //  private static String SECRET_KEY = Credentials.getSecretKey();
-  static String AWS_KEY = "";
-  static String SECRET_KEY = "";
+  static final String AWS_KEY = "";
+  static final String SECRET_KEY = "";
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
   private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
-  private static String PRICE = "price";
-  private static String STORE_NAME = "storeName";
-  private static String TIMESTAMP = "timestamp";
+  private static final String PRICE = "price";
+  private static final String STORE_NAME = "storeName";
+  private static final String TIMESTAMP = "timestamp";
 
   public PutItemOutcome handleRequest(Beer beer, Context context) {
     putItemQuantity(beer);

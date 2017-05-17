@@ -9,7 +9,7 @@ public class Beer {
 	private int quantity;
 	private String storeName;
 	private long timestamp;
-	private ArrayList<BeerHistory> history;
+	private List<BeerHistory> history;
 	private int upvotes;
 	private int downvotes;
 	
@@ -56,7 +56,7 @@ public class Beer {
 
 	public List<BeerHistory> getHistory() {
 		if (history == null)
-			return new ArrayList();
+			return new ArrayList<>();
 		return history;
 	}
 
