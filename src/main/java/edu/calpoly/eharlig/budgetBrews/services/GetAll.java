@@ -17,7 +17,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetBrews.models.Beer;
 
-public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
+public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
   // these are commented so that travis can pass
   // need to think of a way to keep credentials here but have travis pass
 //  private static String AWS_KEY = Credentials.getAwsKey();
@@ -28,15 +28,15 @@ public class GetAll implements RequestHandler<Object, List<ArrayList<Beer>>> {
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
-  public List<ArrayList<Beer>> handleRequest(Object request, Context context) {
-    List<ArrayList<Beer>> beers = new ArrayList();
+  public List<List<Beer>> handleRequest(Object request, Context context) {
+    List<List<Beer>> beers = new ArrayList<List<Beer>>();
     beers.add(getAllQuantity(12));
     beers.add(getAllQuantity(30));
 
     return beers;
   }
 
-  public ArrayList<Beer> getAllQuantity(int quantity) {
+  public List<Beer> getAllQuantity(int quantity) {
     ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
     ScanResult result = client.scan(scanRequest);

@@ -149,7 +149,7 @@ function authenticateUser() {
         data: JSON.stringify(data),
         success: function (response) {
             if (!response) {
-                alert("Invalid username or password.")
+                console.log("Invalid username or password.")
             } else {
                 localStorage.setItem("username", $("#username").val());
                 closeSignInWindow();

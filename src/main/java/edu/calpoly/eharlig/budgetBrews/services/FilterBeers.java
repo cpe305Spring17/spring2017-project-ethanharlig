@@ -11,30 +11,32 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetBrews.models.Beer;
 
-public class FilterBeers implements RequestHandler<Map<String, String>, ArrayList<ArrayList>>{
+public class FilterBeers implements RequestHandler<Map<String, String>, List<List<Beer>>>{
 
-  public ArrayList<ArrayList> handleRequest(Map<String, String> request, Context context) {
+  public List<List<Beer>> handleRequest(Map<String, String> request, Context context) {
     List<Beer> beer12 = new GetAll().getAllQuantity(12);
     List<Beer> beer30 = new GetAll().getAllQuantity(30);
     
-    ArrayList<ArrayList> byBeer12 = new ArrayList<ArrayList>();
-    ArrayList<ArrayList> byBeer30 = new ArrayList<ArrayList>();
-    ArrayList<Beer> eachBeer12 = new ArrayList<Beer>();
-    ArrayList<Beer> eachBeer30 = new ArrayList<Beer>();
+    List<List<Beer>> byBeer12 = new ArrayList<List<Beer>>();
+    List<List<Beer>> byBeer30 = new ArrayList<List<Beer>>();
+    List<Beer> eachBeer12 = new ArrayList<Beer>();
+    List<Beer> eachBeer30 = new ArrayList<Beer>();
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
       byBeer12.add(filterBeer(beer12, entry.getValue()));
     }
 
-    for (ArrayList<Beer> beers : byBeer12)
+    for (List<Beer> beers : byBeer12) {
       eachBeer12.addAll(beers);
+    }
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
       byBeer30.add(filterBeer(beer30, entry.getValue()));
     }
 
-    for (ArrayList<Beer> beers : byBeer30)
+    for (List<Beer> beers : byBeer30) {
       eachBeer30.addAll(beers);
+    }
 
 
     Collections.sort(eachBeer12, new Comparator<Beer>() {
@@ -49,7 +51,7 @@ public class FilterBeers implements RequestHandler<Map<String, String>, ArrayLis
       }
     });
     
-    ArrayList<ArrayList> byBeer = new ArrayList<ArrayList>();
+    List<List<Beer>> byBeer = new ArrayList<List<Beer>>();
 
     byBeer.add(eachBeer12);
     byBeer.add(eachBeer30);
@@ -57,8 +59,8 @@ public class FilterBeers implements RequestHandler<Map<String, String>, ArrayLis
     return byBeer;
   }
   
-  public static ArrayList<Beer> filterBeer(List<Beer> beers, String beerName) {
-    ArrayList<Beer> allBeers = new ArrayList<Beer>();
+  public static List<Beer> filterBeer(List<Beer> beers, String beerName) {
+    List<Beer> allBeers = new ArrayList<Beer>();
 
     for (Beer beer : beers) {
       if (beer.getName().equals(beerName)) {
