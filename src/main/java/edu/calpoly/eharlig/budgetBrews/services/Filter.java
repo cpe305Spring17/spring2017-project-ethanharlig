@@ -19,10 +19,10 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
     List<Beer> beer12 = new GetAll().getAllQuantity(12);
     List<Beer> beer30 = new GetAll().getAllQuantity(30);
 
-    List<List<Beer>> byBeer12 = new ArrayList<List<Beer>>();
-    List<List<Beer>> byBeer30 = new ArrayList<List<Beer>>();
-    List<Beer> eachBeer12 = new ArrayList<Beer>();
-    List<Beer> eachBeer30 = new ArrayList<Beer>();
+    List<List<Beer>> byBeer12 = new ArrayList<>();
+    List<List<Beer>> byBeer30 = new ArrayList<>();
+    List<Beer> eachBeer12 = new ArrayList<>();
+    List<Beer> eachBeer30 = new ArrayList<>();
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
       byBeer12.add(filter(toFilter, beer12, entry.getValue()));
@@ -43,7 +43,7 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
     eachBeer12 = Sorting.sort(eachBeer12);
     eachBeer30 = Sorting.sort(eachBeer30);
 
-    List<List<Beer>> byStore = new ArrayList<List<Beer>>();
+    List<List<Beer>> byStore = new ArrayList<>();
 
     byStore.add(eachBeer12);
     byStore.add(eachBeer30);
@@ -52,24 +52,23 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
   }
 
   public static List<Beer> filter(String toFilter, List<Beer> beers, String toFind) {
-    List<Beer> allBeers = new ArrayList<Beer>();
-    switch (toFilter) {
-    case "stores":
+    List<Beer> allBeers = new ArrayList<>();
+    if (toFilter.equals("stores")) {
       for (Beer beer : beers) {
         if (beer.getStoreName().equals(toFind)) {
           allBeers.add(beer);
         }
       }
-      
-    case "beers":
-    for (Beer beer : beers) {
-      if (beer.getName().equals(toFind)) {
-        allBeers.add(beer);
+    }
+
+    if (toFilter.equals("beers")) {
+      for (Beer beer : beers) {
+        if (beer.getName().equals(toFind)) {
+          allBeers.add(beer);
+        }
       }
-    }
 
     }
-
     return allBeers;
   }
 
