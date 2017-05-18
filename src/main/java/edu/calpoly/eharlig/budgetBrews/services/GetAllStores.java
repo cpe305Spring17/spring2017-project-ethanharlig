@@ -17,8 +17,8 @@ import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 
 public class GetAllStores implements RequestHandler<Object, List<String>> {
-  private static String AWS_KEY = Credentials.getAwsKey();
-  private static String SECRET_KEY = Credentials.getSecretKey();
+  private static final String AWS_KEY = Credentials.getAwsKey();
+  private static final String SECRET_KEY = Credentials.getSecretKey();
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);

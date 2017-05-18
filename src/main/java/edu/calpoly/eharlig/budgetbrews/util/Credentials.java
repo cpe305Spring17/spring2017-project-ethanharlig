@@ -1,6 +1,5 @@
 package edu.calpoly.eharlig.budgetbrews.util;
 
-
 public class Credentials {
   private static final String AWS_KEY = "";//RealCredentials.getAwsKey();
   private static final String SECRET_KEY = "";//RealCredentials.getSecretKey();
