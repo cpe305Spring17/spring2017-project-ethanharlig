@@ -4,6 +4,8 @@ public class Credentials {
   private static final String AWS_KEY = "";//RealCredentials.getAwsKey();
   private static final String SECRET_KEY = "";//RealCredentials.getSecretKey();
   private static final String EMAIL = "budgetbrews305@gmail.com";
+  
+  private Credentials() {}
 
   public static String getAwsKey() {
     return AWS_KEY;
