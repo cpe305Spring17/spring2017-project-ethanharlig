@@ -20,6 +20,8 @@ public class DBAccess {
 
   private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
   
+  private DBAccess() {}
+  
   public static Table getTable(String tableName) {
     return dynamoDB.getTable(tableName);
   }
