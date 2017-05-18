@@ -25,6 +25,11 @@ public class TestModels extends TestCase {
     beer.setHistory(new ArrayList<>());
     assertTrue(beer.getHistory().equals(new ArrayList<>()));
   }
+  
+  public void testHistoryNull() {
+    beer.setHistory(null);
+    assertTrue(beer.getHistory().equals(new ArrayList<>()));
+  }
 
   public void testName() {
     beer.setName("myBeer");
@@ -33,6 +38,11 @@ public class TestModels extends TestCase {
 
   public void testObservers() {
     beer.setObservers(new ArrayList<>());
+    assertTrue(beer.getObservers().equals(new ArrayList<>()));
+  }
+
+  public void testObserversNull() {
+    beer.setObservers(null);
     assertTrue(beer.getObservers().equals(new ArrayList<>()));
   }
 

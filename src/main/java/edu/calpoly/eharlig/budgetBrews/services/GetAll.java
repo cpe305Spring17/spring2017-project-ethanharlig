@@ -5,24 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
+import edu.calpoly.eharlig.budgetbrews.dataaccess.DBAccess;
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
-import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
-  private static final String AWS_KEY = Credentials.getAwsKey();
-  private static final String SECRET_KEY = Credentials.getSecretKey();
-
-  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
 
   public List<List<Beer>> handleRequest(Object request, Context context) {
     List<List<Beer>> beers = new ArrayList<>();
@@ -35,7 +27,7 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
   public List<Beer> getAllQuantity(int quantity) {
     ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
-    ScanResult result = client.scan(scanRequest);
+    ScanResult result = DBAccess.scan(scanRequest);
 
     ArrayList<Beer> allBeers = new ArrayList<>();
 

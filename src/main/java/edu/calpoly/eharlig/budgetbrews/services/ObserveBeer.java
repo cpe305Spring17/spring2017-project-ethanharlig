@@ -4,31 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
+import edu.calpoly.eharlig.budgetbrews.dataaccess.DBAccess;
 import edu.calpoly.eharlig.budgetbrews.models.Subscription;
-import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class ObserveBeer implements RequestHandler<Subscription, Object> {
-  private static final String AWS_KEY = Credentials.getAwsKey();
-  private static final String SECRET_KEY = Credentials.getSecretKey();
-
-  private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
-      new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
-
-  private static DynamoDB dynamoDB = new DynamoDB((AmazonDynamoDB) client);
 
   @Override
   public Object handleRequest(Subscription request, Context context) {
-    Table table = dynamoDB.getTable("beer-" + request.getQuantity());
+    Table table = DBAccess.getTable("beer-" + request.getQuantity());
     Item item = table.getItem("name", request.getBeerName());
 
     List<String> observers = item.getList("observers");
