@@ -16,7 +16,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
 import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
-import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 //  private static String AWS_KEY = Credentials.getAwsKey();
