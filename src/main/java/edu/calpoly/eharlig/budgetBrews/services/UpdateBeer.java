@@ -19,10 +19,10 @@ import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
 import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
-  private static String AWS_KEY = Credentials.getAwsKey();
-  private static String SECRET_KEY = Credentials.getSecretKey();
-//  static final String AWS_KEY = "";
-//  static final String SECRET_KEY = "";
+//  private static String AWS_KEY = Credentials.getAwsKey();
+//  private static String SECRET_KEY = Credentials.getSecretKey();
+  static final String AWS_KEY = "";
+  static final String SECRET_KEY = "";
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);

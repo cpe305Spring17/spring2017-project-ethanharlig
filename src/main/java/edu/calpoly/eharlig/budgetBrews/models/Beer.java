@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.amazonaws.services.simpleemail.AWSJavaMailTransport;
 
-import edu.calpoly.eharlig.budgetbrews.util.Credentials;
+//import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class Beer {
   private String name;
@@ -107,14 +107,16 @@ public class Beer {
   }
 
   public void notifyObservers() {
-    String from = Credentials.getEmail();
+    String from = "budgetbrews305@gmail.com";
     /*
      * Setup JavaMail to use Amazon SES by specifying the "aws" protocol and our AWS credentials.
      */
     Properties props = new Properties();
     props.setProperty("mail.transport.protocol", "aws");
-    props.setProperty("mail.aws.user", Credentials.getAwsKey());
-    props.setProperty("mail.aws.password", Credentials.getSecretKey());
+//    props.setProperty("mail.aws.user", Credentials.getAwsKey());
+//    props.setProperty("mail.aws.password", Credentials.getSecretKey());
+    props.setProperty("mail.aws.user", "");
+    props.setProperty("mail.aws.password", "");
 
     Session session = Session.getInstance(props);
 
