@@ -3,6 +3,8 @@ package edu.calpoly.eharlig.budgetbrews.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,6 +18,8 @@ import com.amazonaws.services.simpleemail.AWSJavaMailTransport;
 import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class Beer {
+  private static final Logger LOGGER = Logger.getLogger(Beer.class.getName());
+  
   private String name;
   private double price;
   private int quantity;
@@ -139,7 +143,7 @@ public class Beer {
 
       t.close();
     } catch (MessagingException e) {
-      System.err.println(e.getStackTrace());
+      LOGGER.log(Level.SEVERE, e.toString(), e);
     }
   }
 
