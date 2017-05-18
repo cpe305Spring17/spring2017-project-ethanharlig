@@ -1,52 +1,60 @@
 package edu.calpoly.eharlig.budgetbrewstest;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
-
-import org.junit.Test;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
 import edu.calpoly.eharlig.budgetbrews.models.Subscription;
 import edu.calpoly.eharlig.budgetbrews.models.User;
+import junit.framework.TestCase;
 
-public class TestModels {
+public class TestModels extends TestCase {
+  Beer beer = new Beer();
   
-  @Test
-  public void testBeer() {
-    Beer beer = new Beer();
+  public void testConstructor() {
 
     assertTrue(beer.getHistory().equals(new ArrayList<>()));
+  }
+  public void testDownvotes() {
     
     beer.setDownvotes(5);
     assertTrue(beer.getDownvotes() == 5);
+  }
+  public void testHistory() {
     
     beer.setHistory(new ArrayList<>());
     assertTrue(beer.getHistory().equals(new ArrayList<>()));
+  }
+  public void testName() {
     
     beer.setName("myBeer");
     assertTrue(beer.getName().equals("myBeer"));
-    
+  }
+  public void testObservers() {
     beer.setObservers(new ArrayList<>());
     assertTrue(beer.getObservers().equals(new ArrayList<>()));
+  }
     
+  public void testPrice() {
     beer.setPrice(24.31);
     assertTrue(Double.compare(beer.getPrice(), 24.31) == 0);
-    
+  }
+  public void testQuantity() {
     beer.setQuantity(40);
     assertTrue(beer.getQuantity() == 40);
-    
+  }
+  public void testStoreName() {
     beer.setStoreName("myStoreName");
     assertTrue(beer.getStoreName().equals("myStoreName"));
-    
+  }
+  public void testTimestamp() {
     beer.setTimestamp(1234567890);
     assertTrue(beer.getTimestamp() == 1234567890);
-    
+  }
+  public void testUpvotes() {
     beer.setUpvotes(55);
     assertTrue(beer.getUpvotes() == 55);
   }
   
-  @Test
   public void testSubscription() {
     Subscription sub = new Subscription();
     
@@ -60,7 +68,6 @@ public class TestModels {
     assertTrue(sub.getQuantity() == 36);
   }
   
-  @Test
   public void testUser() {
     User user = new User();
     
