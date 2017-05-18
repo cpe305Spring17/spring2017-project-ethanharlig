@@ -13,7 +13,8 @@ Users can view the stores around them and check the cost of how much different b
 ![](https://i.imgur.com/uAMicd7.gif)
 
 - Users
-    - [ ] Notify users when prices are updated (Observer pattern)
+    - [x] Notify users when prices are updated (Observer pattern)
+      - [ ] Subscribe to beers
     - [ ] Upvote and downvote user updates
         - [ ] Down vote threshold causes deletion
     - [ ] Profile
