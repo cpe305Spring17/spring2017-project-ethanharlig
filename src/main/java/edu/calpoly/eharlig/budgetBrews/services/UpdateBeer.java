@@ -31,6 +31,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
   private static final String PRICE = "price";
   private static final String STORE_NAME = "storeName";
   private static final String TIMESTAMP = "timestamp";
+  private static final String OBSERVERS = "observers";
 
   public PutItemOutcome handleRequest(Beer beer, Context context) {
     putItemQuantity(beer);
@@ -73,20 +74,19 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
         }
       }
       
-      List<String> observers = item.getList("observers");
+      List<String> observers = item.getList(OBSERVERS);
       if (observers != null) {
         List<String> obs = new ArrayList<>();
         for (String i : observers) {
           obs.add(i);
         }
         beer.setObservers(obs);
-        toUpdate.withList("observers", obs);
-        System.out.println("Notifying people");
+        toUpdate.withList(OBSERVERS, obs);
         beer.notifyObservers();
       }
     }
     else {
-      toUpdate.withList("observers", new ArrayList<String>());
+      toUpdate.withList(OBSERVERS, new ArrayList<String>());
     }
 
 

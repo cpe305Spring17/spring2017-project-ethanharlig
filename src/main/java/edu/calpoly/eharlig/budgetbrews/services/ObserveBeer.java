@@ -11,7 +11,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.document.UpdateItemOutcome;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
@@ -37,13 +36,13 @@ public class ObserveBeer implements RequestHandler<Subscription, Object> {
 
     observers.add(request.getEmail());
 
-    Map<String, String> expressionAttributeNames = new HashMap<String, String>();
+    Map<String, String> expressionAttributeNames = new HashMap<>();
     expressionAttributeNames.put("#O", "observers");
 
-    Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
+    Map<String, Object> expressionAttributeValues = new HashMap<>();
     expressionAttributeValues.put(":val1", observers);
 
-    UpdateItemOutcome outcome = table.updateItem("name", // key attribute name
+    table.updateItem("name", // key attribute name
         request.getBeerName(), // key attribute value
         "set #O = :val1", // UpdateExpression
         expressionAttributeNames, expressionAttributeValues);
