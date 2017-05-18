@@ -15,14 +15,11 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
-  // these are commented so that travis can pass
-  // need to think of a way to keep credentials here but have travis pass
-//  private static String AWS_KEY = Credentials.getAwsKey();
-//  private static String SECRET_KEY = Credentials.getSecretKey();
-  static final String AWS_KEY = "";
-  static final String SECRET_KEY = "";
+  private static String AWS_KEY = Credentials.getAwsKey();
+  private static String SECRET_KEY = Credentials.getSecretKey();
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);

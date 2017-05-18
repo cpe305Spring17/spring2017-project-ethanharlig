@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.amazonaws.services.simpleemail.AWSJavaMailTransport;
 
-//import edu.calpoly.eharlig.budgetbrews.util.Credentials;
+import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class Beer {
   private String name;
@@ -113,10 +113,8 @@ public class Beer {
      */
     Properties props = new Properties();
     props.setProperty("mail.transport.protocol", "aws");
-//    props.setProperty("mail.aws.user", Credentials.getAwsKey());
-//    props.setProperty("mail.aws.password", Credentials.getSecretKey());
-    props.setProperty("mail.aws.user", "");
-    props.setProperty("mail.aws.password", "");
+    props.setProperty("mail.aws.user", Credentials.getAwsKey());
+    props.setProperty("mail.aws.password", Credentials.getSecretKey());
 
     Session session = Session.getInstance(props);
 
