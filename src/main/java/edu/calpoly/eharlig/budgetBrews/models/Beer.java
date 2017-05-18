@@ -139,7 +139,7 @@ public class Beer {
 
       t.close();
     } catch (MessagingException e) {
-      e.printStackTrace();
+      System.err.println(e.getStackTrace());
     }
   }
 
