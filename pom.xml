@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.calpoly.eharlig</groupId>
-	<artifactId>budget-brews</artifactId>
+	<artifactId>BudgetBrews-ethanharlig</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>budget-brews</name>
+	<name>BudgetBrews-ethanharlig</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
