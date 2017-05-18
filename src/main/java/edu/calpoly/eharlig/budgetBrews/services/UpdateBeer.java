@@ -16,12 +16,13 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
 import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
+import edu.calpoly.eharlig.budgetbrews.util.Credentials;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
-//  private static String AWS_KEY = Credentials.getAwsKey();
-//  private static String SECRET_KEY = Credentials.getSecretKey();
-  static final String AWS_KEY = "";
-  static final String SECRET_KEY = "";
+  private static String AWS_KEY = Credentials.getAwsKey();
+  private static String SECRET_KEY = Credentials.getSecretKey();
+//  static final String AWS_KEY = "";
+//  static final String SECRET_KEY = "";
 
   private static AmazonDynamoDBClient client = new AmazonDynamoDBClient(
       new BasicAWSCredentials(AWS_KEY, SECRET_KEY)).withRegion(Regions.US_WEST_2);
@@ -45,6 +46,8 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     Table table = dynamoDB.getTable("beer-" + beer.getQuantity());
 
     Item item = table.getItem("name", beer.getName());
+
+    Item toUpdate = new Item();
 
     if (item != null) {
       List<BeerHistory> bHistory = new ArrayList<>();
@@ -70,9 +73,23 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
           bHistory.add(bh);
         }
       }
+      
+      List<String> observers = item.getList("observers");
+      if (observers != null) {
+        List<String> obs = new ArrayList<>();
+        for (String i : observers) {
+          obs.add(i);
+        }
+        beer.setObservers(obs);
+        toUpdate.withList("observers", obs);
+        System.out.println("Notifying people");
+        beer.notifyObservers();
+      }
+    }
+    else {
+      toUpdate.withList("observers", new ArrayList<String>());
     }
 
-    Item toUpdate = new Item();
 
     toUpdate.withPrimaryKey("name", beer.getName());
     toUpdate.withDouble(PRICE, beer.getPrice());
@@ -80,7 +97,6 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     toUpdate.withLong(TIMESTAMP, System.currentTimeMillis());
     toUpdate.withInt("upvotes", 1);
     toUpdate.withInt("downvotes", 0);
-//     toUpdate.withList("history", bHistory);
 
     table.putItem(toUpdate);
 
