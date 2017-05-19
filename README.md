@@ -15,6 +15,7 @@ Users can view the stores around them and check the cost of how much different b
 - Users
     - [x] Notify users when prices are updated (Observer pattern)
       - [ ] Subscribe to beers
+         - [ ] Weekly email with beer updates and best deals from subscriptions
     - [ ] Upvote and downvote user updates
         - [ ] Down vote threshold causes deletion
     - [ ] Profile
