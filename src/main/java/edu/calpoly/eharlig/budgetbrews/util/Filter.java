@@ -1,4 +1,4 @@
-package edu.calpoly.eharlig.budgetbrews.services;
+package edu.calpoly.eharlig.budgetbrews.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
-import edu.calpoly.eharlig.budgetbrews.util.Sorting;
+import edu.calpoly.eharlig.budgetbrews.services.GetAll;
 
 public class Filter implements RequestHandler<Map<String, String>, List<List<Beer>>> {
 
