@@ -3,7 +3,7 @@
 ![Budget Brews](src/main/website/res/img/logo.png)
 
 ## Ethan Harlig 
-Hosting of website through gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
+### Hosting of website through gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
 
 Crowdsource the best beer deals near you (_currently have support for San Luis Obispo, CA_)!
 
