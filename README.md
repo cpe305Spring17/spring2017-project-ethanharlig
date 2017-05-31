@@ -23,25 +23,12 @@ Users can view the stores around them and check the cost of how much different b
         - [x] Password
         - [ ] Reputation
             - Number of up votes minus down votes
-        - [ ] Badges (maybe)
-        - [ ] Picture (maybe)
 - Filter by
     - [x] Store(s)
         - [x] Support to only filter by one store or many stores
     - [x] Beer(s)
         - [x] Support to only filter by one beer brand or many beer brands
     - [ ] Price per beer
-    - [ ] Distance (maybe)
-        - [ ] Get user location
-        - [ ] SSL certificate
-        - [ ] Backend to calculate distance between store and user
-- Location of store
-    - [ ] Google Maps API
-        - [ ] Geolocator
-        - [ ] Autofill
-    - [ ] Store location
-        - [ ] Parse only store name
-        - [ ] Store whole location in “stores” db
 - API itself
    - [ ] Return response codes for each Lambda function
    - [ ] Change tables such that store name is a sort key
@@ -53,4 +40,4 @@ Users can view the stores around them and check the cost of how much different b
 &nbsp;
 
 ###### Disclaimer
-<sub>Build may show as errored because I am not uploading my Credentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
+<sub>Build may show as errored because I am not uploading my RealCredentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
