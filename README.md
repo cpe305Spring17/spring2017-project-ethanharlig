@@ -6,10 +6,10 @@
 
 Crowdsource the best beer deals near you (_currently have support for San Luis Obispo, CA_)!
 
-Users can view the stores around them and check the cost of how much different beer costs at that store. 
+Users of Budget Brews are shown the cheapest beer deals near them! They can filter the beer prices by beer brand and store in which they can select multiple brands or stores to filter. 
 
 
-# Current Demo of the site with a 'party' background
+# Current state of the site with a "party" background
 ![](https://i.imgur.com/uAMicd7.gif)
 
 - Users
@@ -33,9 +33,7 @@ Users can view the stores around them and check the cost of how much different b
    - [ ] Return response codes for each Lambda function
    - [ ] Change tables such that store name is a sort key
    - [x] Add DBAccess package for data access layer
-   - [ ] Add history to beer prices and maybe show graphs over time to see when certain beers are cheapest and how their price fluctuates
 
-&nbsp;
 &nbsp;
 &nbsp;
 
