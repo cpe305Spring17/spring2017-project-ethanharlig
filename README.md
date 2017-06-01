@@ -42,5 +42,7 @@ Users of Budget Brews are shown the cheapest beer deals near them! They can filt
 &nbsp;
 &nbsp;
 
+---
+
 ###### Disclaimer
 <sub>Build may show as errored because I am not uploading my RealCredentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
