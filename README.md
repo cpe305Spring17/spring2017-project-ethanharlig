@@ -4,8 +4,8 @@
 
 ## Ethan Harlig 
 ### Hosting of website through gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
-<sub>Please note that since this project is using AWS Lambda with Java, the startup time of the functions is up to eight seconds. Because of this, the website may have a high latency when it hasn't been used in a while.</sub>
-
+<sub>Please note that since this project is using AWS Lambda with Java, the startup time of the functions is up to eight seconds. Because of this, the website may have a high latency when it hasn't been used in a while.</sub>     
+     
 Crowdsource the best beer deals near you (_currently have support for San Luis Obispo, CA_)!
 
 Users of Budget Brews are shown the cheapest beer deals near them! They can filter the beer prices by beer brand and store in which they can select multiple brands or stores to filter. 
