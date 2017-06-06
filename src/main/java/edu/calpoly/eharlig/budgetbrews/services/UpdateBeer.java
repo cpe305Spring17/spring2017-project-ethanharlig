@@ -27,9 +27,6 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
   }
 
   private static void putItemQuantity(Beer beer) {
-    // TODO add lowest price to table and set history with ordered
-    // timestamps
-
     Table table = DBAccess.getTable("beer-" + beer.getQuantity());
 
     Item item = table.getItem("name", beer.getName());

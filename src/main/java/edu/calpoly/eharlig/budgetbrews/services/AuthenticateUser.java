@@ -8,16 +8,16 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import edu.calpoly.eharlig.budgetbrews.dataaccess.DBAccess;
 import edu.calpoly.eharlig.budgetbrews.models.User;
 
-public class AuthenticateUser implements RequestHandler<User, Boolean> {
+public class AuthenticateUser implements RequestHandler<User, String> {
 
-  public Boolean handleRequest(User request, Context context) {
+  public String handleRequest(User request, Context context) {
     Table table = DBAccess.getTable("users");
     Item item = table.getItem("username", request.getUsername());
     
     if (item == null)
-      return false;
+      return null;
 
-    return item.getString("password").equals(request.getPassword());
+    return item.getString("password").equals(request.getPassword()) ? item.getString("email") : null;
   }
   
 
