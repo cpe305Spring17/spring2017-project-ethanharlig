@@ -5,9 +5,6 @@
 ## Ethan Harlig 
 ### Hosting of website through gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
 
-<<<<<<< HEAD
-Hosting of website through this gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
-=======
 <sub>Please note that since this project is using AWS Lambda with Java, the startup time of the functions is up to eight seconds. Because of this, the website may have a high latency when it hasn't been used in a while.</sub>
 
 ---
@@ -49,4 +46,3 @@ Users of Budget Brews are shown the cheapest beer deals near them! They can filt
 
 ###### Disclaimer
 <sub>Build may show as errored because I am not uploading my RealCredentials.java file. Travis-CI doesn't like this so I try to comment it out but sometimes I forget and the build errors :(</sub>
->>>>>>> master
