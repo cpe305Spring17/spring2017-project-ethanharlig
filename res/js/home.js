@@ -4,13 +4,14 @@ var subscriptions = [];
 $(document).ready(function () {
     //  party mode below!
     //    createPartyBackground();
-    getCheapest();
     if (sessionStorage.getItem("username") != null) {
         $("#sign-in").hide();
         $("#sign-out").show();
+        getSubscriptions(sessionStorage.getItem("username"));
     } else {
         $("#sign-out").hide();
         $("#sign-in").show();
+        getCheapest();
     }
 
     $("#update_popup").popup({
@@ -96,6 +97,8 @@ function createTrs(oneQuantity, toCheck) {
     var quantity = oneQuantity[0].quantity;
     $("#brews-table-" + quantity + " tbody").empty();
 
+    var ndx = 0;
+
     oneQuantity.forEach(function (entry) {
         var tr = "<tr>";
         tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
@@ -103,17 +106,27 @@ function createTrs(oneQuantity, toCheck) {
         tr += "<td>" + entry.storeName + "</td>";
         tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
 
-        console.log(sessionStorage.getItem("username"));
         if (sessionStorage.getItem("username") != null) {
             if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
-                tr += "<td><button type='button' class='btn btn-default'>Subscribe</button></td>";
+                tr += "<td><button type='button' class='btn btn-default' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
+                tr += "</tr>";
+                $("#brews-table-" + entry.quantity + " tbody").append(tr);
+                $("#subscribe-" + quantity + "-" + ndx).click(function (ev) {
+                    subscribeToBeer(entry.name, quantity);
+                });
             } else {
-                tr += "<td><button type='button' class='btn btn-default'>Unsubscribe</button></td>";
+                tr += "<td><button type='button' class='btn btn-default' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
+                tr += "</tr>";
+                $("#brews-table-" + entry.quantity + " tbody").append(tr);
+                $("#unsubscribe-" + quantity + "-" + ndx).click(function (ev) {
+                    unsubscribeFromBeer(entry.name, quantity);
+                });
             }
+        } else {
+            tr += "</tr>";
+            $("#brews-table-" + entry.quantity + " tbody").append(tr);
         }
-
-        tr += "</tr>";
-        $("#brews-table-" + entry.quantity + " tbody").append(tr);
+        ndx++;
     });
 
     buildTable(quantity);
@@ -187,10 +200,11 @@ function authenticateUser() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
-            if (!response) {
+            if (response == null) {
                 console.log("Invalid username or password.")
             } else {
                 sessionStorage.setItem("username", $("#username").val());
+                sessionStorage.setItem("email", response);
                 closeSignInWindow();
                 $("#sign-in").hide();
                 $("#sign-out").show();
@@ -264,7 +278,7 @@ function displayStores() {
                 $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store + "<br>");
                 ndx += 1;
             });
-            $("#options").append("<button type='submit' id='submit-store'>Filter by these stores!</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter by these stores!</button>");
             $("#options-container").show();
             $("#submit-store").click(function (ev) {
                 var selected = [];
@@ -290,7 +304,7 @@ function displayBeers() {
                 $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName + "<br>");
             });
 
-            $("#options").append("<button type='submit' id='submit-beer'>Filter by these beers!</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' id='submit-beer'>Filter by these beers!</button>");
             $("#options-container").show();
             $("#submit-beer").click(function (ev) {
                 var selected = [];
@@ -302,7 +316,6 @@ function displayBeers() {
             });
         }
     });
-
 }
 
 
@@ -343,6 +356,58 @@ function filterBy(input, toFilterBy) {
                 });
                 createTrs(beer12, subscriptions);
                 createTrs(beer30, subscriptions);
+            }
+        }
+    });
+}
+
+
+function subscribeToBeer(beerName, quantity) {
+    var data = {
+        email: sessionStorage.getItem('email'),
+        username: sessionStorage.getItem('username'),
+        beerName: beerName,
+        quantity: quantity
+    };
+
+    console.log(data);
+
+    $.ajax({
+        url: API_URL + 'observe-beer',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response != null) {
+                console.log("Couldn't subscribe to beer.")
+            } else {
+                getSubscriptions(sessionStorage.getItem('username'));
+            }
+        }
+    });
+}
+
+
+function unsubscribeFromBeer(beerName, quantity) {
+    var data = {
+        email: sessionStorage.getItem('email'),
+        username: sessionStorage.getItem('username'),
+        beerName: beerName,
+        quantity: quantity
+    };
+
+    console.log(data);
+
+    $.ajax({
+        url: API_URL + 'unobserve-beer',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response != null) {
+                console.log("Couldn't unsubscribe from beer.")
+            } else {
+                getSubscriptions(sessionStorage.getItem('username'));
             }
         }
     });
