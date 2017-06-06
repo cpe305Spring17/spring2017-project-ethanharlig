@@ -1,4 +1,5 @@
 var API_URL = 'https://s7pc06oh92.execute-api.us-west-2.amazonaws.com/test/';
+var subscriptions = [];
 
 $(document).ready(function () {
     //  party mode below!
@@ -23,6 +24,23 @@ $(document).ready(function () {
 
     $("#submit-sign-in").click(function (ev) {
         authenticateUser();
+        ev.preventDefault();
+    });
+
+    $("#submit-sign-up").click(function (ev) {
+        addUser();
+        ev.preventDefault();
+    });
+
+    $("#sign-in-btn").click(function (ev) {
+        $("#sign-up-form").hide();
+        $("#sign-in-form").show();
+        ev.preventDefault();
+    });
+
+    $("#sign-up-btn").click(function (ev) {
+        $("#sign-in-form").hide();
+        $("#sign-up-form").show();
         ev.preventDefault();
     });
 
@@ -53,15 +71,14 @@ function getCheapest() {
                 response.forEach(function (oneQuantity) {
                     if (oneQuantity.length == 0)
                         return;
-                    createTrs(oneQuantity);
+                    createTrs(oneQuantity, subscriptions);
                 });
             }
         }
     });
-
 }
 
-function createTrs(oneQuantity) {
+function createTrs(oneQuantity, toCheck) {
     if (oneQuantity.length == 0)
         return;
     var quantity = oneQuantity[0].quantity;
@@ -73,6 +90,13 @@ function createTrs(oneQuantity) {
         tr += "<td>" + entry.name + "</td>";
         tr += "<td>" + entry.storeName + "</td>";
         tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
+
+        if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
+            tr += "<td><button type='button' class='btn btn-default'>Subscribe</button></td>";
+        } else {
+            tr += "<td><button type='button' class='btn btn-default'>Unsubscribe</button></td>";
+        }
+
         tr += "</tr>";
         $("#brews-table-" + entry.quantity + " tbody").append(tr);
     });
@@ -153,10 +177,53 @@ function authenticateUser() {
             } else {
                 localStorage.setItem("username", $("#username").val());
                 closeSignInWindow();
+                getSubscriptions($("#username").val());
             }
         }
     });
+}
 
+function addUser() {
+    var data = {
+        username: $("#sign-up-username").val(),
+        email: $("#sign-up-email").val(),
+        password: $("#sign-up-password").val()
+    };
+    $.ajax({
+        url: API_URL + 'add-user',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (!response) {
+                console.log("Error signing up. Please try again")
+            } else {
+                $("#sign-up-form").hide();
+                $("#sign-in-form").show();
+            }
+        }
+    });
+}
+
+
+function getSubscriptions(username) {
+    var data = {
+        username: username
+    };
+    $.ajax({
+        url: API_URL + 'get-subscriptions',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (!response) {
+                console.log("Invalid username or password.")
+            } else {
+                subscriptions = response;
+                getCheapest();
+            }
+        }
+    });
 }
 
 
@@ -201,9 +268,11 @@ function displayBeers() {
         url: API_URL + 'get-all-beer-names',
         type: 'GET',
         success: function (response) {
+
             response.forEach(function (beerName) {
                 $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName + "<br>");
             });
+
             $("#options").append("<button type='submit' id='submit-beer'>Filter by these beers!</button>");
             $("#options-container").show();
             $("#submit-beer").click(function (ev) {
@@ -255,11 +324,9 @@ function filterBy(input, toFilterBy) {
                             beer30.push(entry);
                     });
                 });
-                createTrs(beer12);
-                createTrs(beer30);
+                createTrs(beer12, subscriptions);
+                createTrs(beer30, subscriptions);
             }
         }
     });
-
-
 }

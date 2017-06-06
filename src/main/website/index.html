@@ -63,6 +63,7 @@
                         <th>Brand</th>
                         <th>Store Name</th>
                         <th>Time Reported</th>
+                        <th></th>
                     </thead>
                     <tbody>
                     </tbody>
@@ -78,6 +79,7 @@
                         <th>Brand</th>
                         <th>Store Name</th>
                         <th>Time Reported</th>
+                        <th></th>
                     </thead>
                     <tbody>
                     </tbody>
@@ -116,7 +118,7 @@
         </div>
 
         <div class="card" id="sign_in_popup" style="width: 40%; padding: 15px; border-radius: 10px; background: white;">
-            <form id="sign-in" class="sign-in-submit">
+            <form id="sign-in-form" class="sign-in-submit">
                 <div class="card-block">
                     <div class="form-group">
                         <label for="username">Username</label>
@@ -127,6 +129,25 @@
                         <input type="password" class="form-control" id="password" placeholder="hunter2">
                     </div>
                     <button type="submit" id="submit-sign-in">Sign in</button>
+                    <button type="button" id="sign-up-btn" class="pull-right">Don't have an account? Sign up!</button>
+                </div>
+            </form>
+            <form id="sign-up-form" class="sign-up-submit" style="display: none;">
+                <div class="card-block">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="sign-up-username" placeholder="myusername">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="sign-up-email" placeholder="myemail@geemail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="sign-up-password" placeholder="hunter2">
+                    </div>
+                    <button type="submit" id="submit-sign-up">Create my account!</button>
+                    <button type="button" id="sign-in-btn" class="pull-right">Have an account? Sign in!</button>
                 </div>
             </form>
         </div>
