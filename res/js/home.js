@@ -31,16 +31,19 @@ $(document).ready(function () {
     });
 
     $("#submit-update-beer").click(function (ev) {
+        $("#submit-update-beer").button("loading");
         handleUpdate();
         ev.preventDefault();
     });
 
     $("#submit-sign-in").click(function (ev) {
+        $("#submit-sign-in").button("loading");
         authenticateUser();
         ev.preventDefault();
     });
 
     $("#submit-sign-up").click(function (ev) {
+        $("#submit-sign-up").button("loading");
         addUser();
         ev.preventDefault();
     });
@@ -59,12 +62,14 @@ $(document).ready(function () {
 
     $("#filter-store").click(function (ev) {
         $("#options").empty();
+        $("#generating").show();
         displayStores();
         ev.preventDefault();
     });
 
     $("#filter-beer-name").click(function (ev) {
         $("#options").empty();
+        $("#generating").show();
         displayBeers();
         ev.preventDefault();
     });
@@ -158,16 +163,19 @@ function handleUpdate() {
         quantity: $("input[name='quantity']:checked").val(),
         price: (Number($("#price").val())).toFixed(2)
     };
+
     $.ajax({
         url: API_URL + 'update-beer',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
+            $("#submit-update-beer").button("reset");
             if (response != null) {
                 console.log("failed");
             } else {
                 closeUpdateWindow();
+                getSubscriptions(sessionStorage.getItem("username"));
             }
         }
     });
@@ -185,7 +193,6 @@ function createPartyBackground() {
             img.appendTo($("#background-imgs"));
         }
     }
-
 }
 
 
@@ -200,6 +207,7 @@ function authenticateUser() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
+            $("#submit-sign-in").button("reset");
             if (response == null) {
                 console.log("Invalid username or password.")
             } else {
@@ -214,6 +222,7 @@ function authenticateUser() {
     });
 }
 
+
 function addUser() {
     var data = {
         username: $("#sign-up-username").val(),
@@ -226,6 +235,7 @@ function addUser() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
+            $("#submit-sign-up").button("reset");
             if (!response) {
                 alert("That username already exists. Please try to sign up again with a different username!");
             } else {
@@ -238,23 +248,27 @@ function addUser() {
 
 
 function getSubscriptions(username) {
-    var data = {
-        username: username
-    };
-    $.ajax({
-        url: API_URL + 'get-subscriptions',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        success: function (response) {
-            if (!response) {
-                console.log("Invalid username or password.")
-            } else {
-                subscriptions = response;
-                getCheapest();
+    if (username == null) {
+        getCheapest();
+    } else {
+        var data = {
+            username: username
+        };
+        $.ajax({
+            url: API_URL + 'get-subscriptions',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                if (!response) {
+                    console.log("Invalid username or password.")
+                } else {
+                    subscriptions = response;
+                    getCheapest();
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 
@@ -273,10 +287,9 @@ function displayStores() {
         url: API_URL + 'get-all-stores',
         type: 'GET',
         success: function (response) {
-            var ndx = 0;
+            $("#generating").hide();
             response.forEach(function (store) {
                 $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store.substring(0, 17) + "<br>");
-                ndx += 1;
             });
             $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter</button>");
             $("#options-container").show();
@@ -299,7 +312,7 @@ function displayBeers() {
         url: API_URL + 'get-all-beer-names',
         type: 'GET',
         success: function (response) {
-
+            $("#generating").hide();
             response.forEach(function (beerName) {
                 $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName.substring(0, 17) + "<br>");
             });

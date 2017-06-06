@@ -18,9 +18,9 @@
 </head>
 
 <body background="res/img/background.jpg">
-    <!--    <img class="img-responsive center-block" src="res/img/logo.png" alt="BudgetBrews" width="80%" />-->
     <div class="text-center">
-        <h1 style="font-size: 750%;"><span style="color:#ff0000;">B</span><span style="color:#ff2a00;">u</span><span style="color:#ff5500;">d</span><span style="color:#ff7f00;">g</span><span style="color:#ffbf00;">e</span><span style="color:#ffff00;">t</span><span style="color:#aaff00;"> </span><span style="color:#55ff00;">B</span><span style="color:#00ff00;">r</span><span style="color:#00ff80;">e</span><span style="color:#00ffff;">w</span><span style="color:#00aaff;">s</span></h1>
+        <img class="img-responsive center-block" src="res/img/logo.png" alt="BudgetBrews" width="40%" />
+        <!--        <h1 style="font-size: 750%;"><span style="color:#ff0000;">B</span><span style="color:#ff2a00;">u</span><span style="color:#ff5500;">d</span><span style="color:#ff7f00;">g</span><span style="color:#ffbf00;">e</span><span style="color:#ffff00;">t</span><span style="color:#aaff00;"> </span><span style="color:#55ff00;">B</span><span style="color:#00ff00;">r</span><span style="color:#00ff80;">e</span><span style="color:#00ffff;">w</span><span style="color:#00aaff;">s</span></h1>-->
         <h4>San Luis Obispo, CA</h4>
         <p class="sexy_line"></p>
     </div>
@@ -29,19 +29,17 @@
     </div>
 
     <div class="btn pull-right">
-        <button id="sign-in" class="sign_in_popup_open">Sign in</button>
+        <button id="sign-in" class="btn btn-success sign_in_popup_open">Sign in</button>
     </div>
     <div class="btn pull-right">
-        <button id="sign-out" style="display: none;">Sign out</button>
+        <button id="sign-out" class="btn btn-danger" style="display: none;">Sign out</button>
     </div>
 
-    <br><br><br><br>
 
     <div id="container">
         <div class="btn pull-right">
-            <button id="update-price" class="update_popup_open">Update a beer price</button>
+            <button id="update-price" class="btn btn-warning update_popup_open">Update a beer price</button>
         </div>
-
 
         <div class="dropdown pull-left">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter By<span class="caret"></span></button>
@@ -49,14 +47,12 @@
                 <li><a id="filter-store" href="#">Store</a></li>
                 <li><a id="filter-beer-name" href="#">Beer</a></li>
             </ul>
+            <p style="display:none;" id="generating">Generating your options...</p>
             <div id="options-container" style="display: none;">
                 <form id="options">
                 </form>
             </div>
         </div>
-
-
-
 
         <div class="table" style="width: 80%;">
             <div class="table-container">
@@ -73,8 +69,8 @@
                     </tbody>
                 </table>
                 <button class="btn" id="show-12" value="hide">Show more</button>
-
             </div>
+
             <div class="table-container">
                 <h1 class="text-center" style="margin: auto;padding-bottom: 10px;background: transparent; width: 20%"><u>30 Packs</u></h1>
                 <table id="brews-table-30" class="table" style="table-layout: fixed;background: transparent;">
@@ -116,7 +112,7 @@
                         <label for="price">Price:</label>
                         <input type="number" step=".01" class="form-control" id="price" placeholder="16.69">
                     </div>
-                    <button type="submit" id="submit-update-beer">Submit</button>
+                    <button class="btn btn-success" type="submit" id="submit-update-beer" data-loading-text="Updating beer price">Submit</button>
                 </div>
             </form>
         </div>
@@ -132,8 +128,8 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="hunter2">
                     </div>
-                    <button type="submit" id="submit-sign-in">Sign in</button>
-                    <button type="button" id="sign-up-btn" class="pull-right">Don't have an account? Sign up!</button>
+                    <button class="btn btn-success" type="submit" id="submit-sign-in" data-loading-text="Signing in">Sign in</button>
+                    <button class="btn btn-info pull-right" type="button" id="sign-up-btn">Don't have an account? Sign up!</button>
                 </div>
             </form>
             <form id="sign-up-form" class="sign-up-submit" style="display: none;">
@@ -150,8 +146,8 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="sign-up-password" placeholder="hunter2">
                     </div>
-                    <button type="submit" id="submit-sign-up">Create my account!</button>
-                    <button type="button" id="sign-in-btn" class="pull-right">Have an account? Sign in!</button>
+                    <button class="btn btn-success" type="submit" id="submit-sign-up" data-loading-text="Creating account">Create my account!</button>
+                    <button class="btn btn-info pull-right" type="button" id="sign-in-btn">Have an account? Sign in!</button>
                 </div>
             </form>
         </div>
