@@ -275,10 +275,10 @@ function displayStores() {
         success: function (response) {
             var ndx = 0;
             response.forEach(function (store) {
-                $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store + "<br>");
+                $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store.substring(0, 17) + "<br>");
                 ndx += 1;
             });
-            $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter by these stores!</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter</button>");
             $("#options-container").show();
             $("#submit-store").click(function (ev) {
                 var selected = [];
@@ -301,10 +301,10 @@ function displayBeers() {
         success: function (response) {
 
             response.forEach(function (beerName) {
-                $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName + "<br>");
+                $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName.substring(0, 17) + "<br>");
             });
 
-            $("#options").append("<button class='btn btn-default' type='submit' id='submit-beer'>Filter by these beers!</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' id='submit-beer'>Filter</button>");
             $("#options-container").show();
             $("#submit-beer").click(function (ev) {
                 var selected = [];
