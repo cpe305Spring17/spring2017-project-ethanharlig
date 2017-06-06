@@ -5,8 +5,12 @@ $(document).ready(function () {
     //  party mode below!
     //    createPartyBackground();
     getCheapest();
-    if (localStorage.getItem("username") != null) {
-        console.log("hey");
+    if (sessionStorage.getItem("username") != null) {
+        $("#sign-in").hide();
+        $("#sign-out").show();
+    } else {
+        $("#sign-out").hide();
+        $("#sign-in").show();
     }
 
     $("#update_popup").popup({
@@ -15,6 +19,14 @@ $(document).ready(function () {
 
     $("#sign_in_popup").popup({
         transition: 'all 0.3s'
+    });
+
+    $("#sign-out").click(function (ev) {
+        sessionStorage.removeItem("username");
+        $("#sign-out").hide();
+        $("#sign-in").show();
+        subscriptions = [];
+        getCheapest();
     });
 
     $("#submit-update-beer").click(function (ev) {
@@ -91,10 +103,13 @@ function createTrs(oneQuantity, toCheck) {
         tr += "<td>" + entry.storeName + "</td>";
         tr += "<td>" + moment(new Date(0).setUTCMilliseconds(entry.timestamp)).fromNow() + "</td>";
 
-        if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
-            tr += "<td><button type='button' class='btn btn-default'>Subscribe</button></td>";
-        } else {
-            tr += "<td><button type='button' class='btn btn-default'>Unsubscribe</button></td>";
+        console.log(sessionStorage.getItem("username"));
+        if (sessionStorage.getItem("username") != null) {
+            if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
+                tr += "<td><button type='button' class='btn btn-default'>Subscribe</button></td>";
+            } else {
+                tr += "<td><button type='button' class='btn btn-default'>Unsubscribe</button></td>";
+            }
         }
 
         tr += "</tr>";
@@ -175,8 +190,10 @@ function authenticateUser() {
             if (!response) {
                 console.log("Invalid username or password.")
             } else {
-                localStorage.setItem("username", $("#username").val());
+                sessionStorage.setItem("username", $("#username").val());
                 closeSignInWindow();
+                $("#sign-in").hide();
+                $("#sign-out").show();
                 getSubscriptions($("#username").val());
             }
         }
@@ -196,7 +213,7 @@ function addUser() {
         data: JSON.stringify(data),
         success: function (response) {
             if (!response) {
-                console.log("Error signing up. Please try again")
+                alert("That username already exists. Please try to sign up again with a different username!");
             } else {
                 $("#sign-up-form").hide();
                 $("#sign-in-form").show();
