@@ -16,10 +16,10 @@ public class ObserveBeer implements RequestHandler<Subscription, Object> {
 
   @Override
   public Object handleRequest(Subscription request, Context context) {
-    Table table = DBAccess.getTable("beer-" + request.getQuantity());
-    Item item = table.getItem("name", request.getBeerName());
+    Table beerTable = DBAccess.getTable("beer-" + request.getQuantity());
+    Item beerItem = beerTable.getItem("name", request.getBeerName());
 
-    List<String> observers = item.getList("observers");
+    List<String> observers = beerItem.getList("observers");
 
     observers.add(request.getEmail());
 
@@ -29,10 +29,24 @@ public class ObserveBeer implements RequestHandler<Subscription, Object> {
     Map<String, Object> expressionAttributeValues = new HashMap<>();
     expressionAttributeValues.put(":val1", observers);
 
-    table.updateItem("name", // key attribute name
+    beerTable.updateItem("name", // key attribute name
         request.getBeerName(), // key attribute value
         "set #O = :val1", // UpdateExpression
         expressionAttributeNames, expressionAttributeValues);
+
+    Table usersTable = DBAccess.getTable("users");
+    Item userItem = usersTable.getItem("username", request.getUsername());
+
+    List<String> subscriptions = userItem.getList("subscriptions");
+
+    if (!(subscriptions.contains(request.getBeerName() + "-" + request.getQuantity())))
+      subscriptions.add(request.getBeerName() + "-" + request.getQuantity());
+
+    Map<String, Object> userExpressionAttributeValues = new HashMap<>();
+    userExpressionAttributeValues.put(":s", subscriptions);
+
+    usersTable.updateItem("username", request.getUsername(), "set subscriptions = :s", null,
+        userExpressionAttributeValues);
 
     return null;
   }
