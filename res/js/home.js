@@ -113,18 +113,20 @@ function createTrs(oneQuantity, toCheck) {
 
         if (sessionStorage.getItem("username") != null) {
             if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
-                tr += "<td><button type='button' class='btn btn-default' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
+                tr += "<td><button type='button' class='btn btn-default' data-loading-text='Subscribing' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#subscribe-" + quantity + "-" + ndx).click(function (ev) {
-                    subscribeToBeer(entry.name, quantity);
+                    $(this).button("loading");
+                    subscribeToBeer(entry.name, quantity, ndx);
                 });
             } else {
-                tr += "<td><button type='button' class='btn btn-default' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
+                tr += "<td><button type='button' class='btn btn-default' data-loading-text='Unsubscribing' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#unsubscribe-" + quantity + "-" + ndx).click(function (ev) {
-                    unsubscribeFromBeer(entry.name, quantity);
+                    $(this).button("loading");
+                    unsubscribeFromBeer(entry.name, quantity, ndx);
                 });
             }
         } else {
@@ -375,7 +377,7 @@ function filterBy(input, toFilterBy) {
 }
 
 
-function subscribeToBeer(beerName, quantity) {
+function subscribeToBeer(beerName, quantity, ndx) {
     var data = {
         email: sessionStorage.getItem('email'),
         username: sessionStorage.getItem('username'),
@@ -395,6 +397,7 @@ function subscribeToBeer(beerName, quantity) {
                 console.log("Couldn't subscribe to beer.")
             } else {
                 getSubscriptions(sessionStorage.getItem('username'));
+                $("#subscribe-" + quantity + "-" + ndx).button("reset");
             }
         }
     });
