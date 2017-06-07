@@ -79,6 +79,7 @@ $(document).ready(function () {
 
 
 function getCheapest() {
+    $("#display-loading").show();
     $.ajax({
         url: API_URL + 'all-beers?',
         type: 'GET',
@@ -90,6 +91,7 @@ function getCheapest() {
                     if (oneQuantity.length == 0)
                         return;
                     createTrs(oneQuantity, subscriptions);
+                    $("#display-loading").hide();
                 });
             }
         }
