@@ -29,7 +29,9 @@ public class Beer {
   private int downvotes;
   private List<String> observers;
 
-  public Beer() {}
+  public Beer() {
+    observers = new ArrayList<>();
+  }
 
   public String getName() {
     return name;
@@ -100,7 +102,7 @@ public class Beer {
   public void notifyObservers() {
     String from = "budgetbrews305@gmail.com";
     
-    if (this.getObservers().size() == 0)
+    if (this.getObservers().isEmpty())
       return;
 
     /*

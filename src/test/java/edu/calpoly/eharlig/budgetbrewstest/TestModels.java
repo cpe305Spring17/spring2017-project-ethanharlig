@@ -102,5 +102,17 @@ public class TestModels extends TestCase {
     user.setUsername("myusername");
     assertTrue(user.getUsername().equals("myusername"));
   }
+  
+  public void testUserUpvotes() {
+    List<String> ups = new ArrayList<>();
+    ups.add("test");
+    
+  }
+
+  public void testUserDownvotes() {
+    List<String> downs = new ArrayList<>();
+    downs.add("test");
+    
+  }
 
 }
