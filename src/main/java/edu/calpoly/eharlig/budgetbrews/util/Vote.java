@@ -9,7 +9,7 @@ import edu.calpoly.eharlig.budgetbrews.dataaccess.DBAccess;
 import edu.calpoly.eharlig.budgetbrews.models.Subscription;
 
 public class Vote {
-  public Vote() {}
+  private Vote() {}
 
   public static void vote(Subscription sub, String voteType) {
     Table beerTable = DBAccess.getTable("beer-" + sub.getQuantity());
