@@ -1,5 +1,7 @@
 package edu.calpoly.eharlig.budgetbrewstest;
 
+import java.util.Random;
+
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
 import edu.calpoly.eharlig.budgetbrews.services.UpdateBeer;
 import junit.framework.TestCase;
@@ -15,6 +17,12 @@ public class TestServices extends TestCase {
     beer.setStoreName("sonar-test-store");
     
     updateBeer.handleRequest(beer, null);
+    
+    Beer newBeer = new Beer();
+    beer.setName(Double.toString(new Random().nextDouble()));
+    beer.setPrice(1234.56);
+    beer.setQuantity(12);
+    beer.setStoreName("sonar-test-store");
     
   }
 
