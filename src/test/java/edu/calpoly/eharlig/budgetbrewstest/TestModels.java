@@ -80,14 +80,12 @@ public class TestModels extends TestCase {
   }
   
   public void testNotify() {
-    beer.notify();
+    beer.notifyObservers();
     
     List<String> obs = new ArrayList<>();
     obs.add("ethan.harlig@gmail.com");
     beer.setObservers(obs);
-    beer.notify();
-
-    assertTrue(true);
+    beer.notifyObservers();
   }
 
   public void testSubBeerName() {
