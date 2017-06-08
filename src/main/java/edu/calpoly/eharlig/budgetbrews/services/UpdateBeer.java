@@ -20,12 +20,6 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
   private static final String OBSERVERS = "observers";
 
   public PutItemOutcome handleRequest(Beer beer, Context context) {
-    putItemQuantity(beer);
-
-    return null;
-  }
-
-  private static void putItemQuantity(Beer beer) {
     Table table = DBAccess.getTable("beer-" + beer.getQuantity());
 
     Item item = table.getItem("name", beer.getName());
@@ -82,6 +76,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 
     table.putItem(toUpdate);
 
+    return null;
   }
 
 }

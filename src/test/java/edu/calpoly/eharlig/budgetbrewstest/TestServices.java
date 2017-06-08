@@ -15,6 +15,7 @@ public class TestServices extends TestCase {
     beer.setStoreName("sonar-test-store");
     
     updateBeer.handleRequest(beer, null);
+    
   }
 
 }
