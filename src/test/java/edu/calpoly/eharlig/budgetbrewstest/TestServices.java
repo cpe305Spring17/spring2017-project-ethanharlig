@@ -19,10 +19,12 @@ public class TestServices extends TestCase {
     updateBeer.handleRequest(beer, null);
     
     Beer newBeer = new Beer();
-    beer.setName(Double.toString(new Random().nextDouble()));
-    beer.setPrice(1234.56);
-    beer.setQuantity(12);
-    beer.setStoreName("sonar-test-store");
+    newBeer.setName(Double.toString(new Random().nextDouble()));
+    newBeer.setPrice(1234.56);
+    newBeer.setQuantity(12);
+    newBeer.setStoreName("sonar-test-store");
+
+    updateBeer.handleRequest(newBeer, null);
     
   }
 
