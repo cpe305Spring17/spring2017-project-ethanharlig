@@ -24,7 +24,7 @@ public class GetAll implements RequestHandler<Object, List<List<Beer>>> {
     return beers;
   }
 
-  public List<Beer> getAllQuantity(int quantity) {
+  public static List<Beer> getAllQuantity(int quantity) {
     ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
     ScanResult result = DBAccess.scan(scanRequest);

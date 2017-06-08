@@ -6,8 +6,9 @@ import java.util.Map;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
 import edu.calpoly.eharlig.budgetbrews.util.Filter;
+import junit.framework.TestCase;
 
-public class TestFilter {
+public class TestFilter extends TestCase {
   Map<String, String> filterMap = new HashMap<>();
   Filter filter = new Filter();
 

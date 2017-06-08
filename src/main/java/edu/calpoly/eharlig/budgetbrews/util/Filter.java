@@ -16,8 +16,8 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
     String toFilter = request.get("filter");
     request.remove("filter");
 
-    List<Beer> beer12 = new GetAll().getAllQuantity(12);
-    List<Beer> beer30 = new GetAll().getAllQuantity(30);
+    List<Beer> beer12 = GetAll.getAllQuantity(12);
+    List<Beer> beer30 = GetAll.getAllQuantity(30);
 
     List<List<Beer>> byBeer12 = new ArrayList<>();
     List<List<Beer>> byBeer30 = new ArrayList<>();
