@@ -1,5 +1,7 @@
 var API_URL = 'https://s7pc06oh92.execute-api.us-west-2.amazonaws.com/test/';
 var subscriptions = [];
+var upvotes = [];
+var downvotes = [];
 
 $(document).ready(function () {
     //  party mode below!
@@ -90,7 +92,7 @@ function getCheapest() {
                 response.forEach(function (oneQuantity) {
                     if (oneQuantity.length == 0)
                         return;
-                    createTrs(oneQuantity, subscriptions);
+                    createTrs(oneQuantity, subscriptions, upvotes, downvotes);
                     $("#display-loading").hide();
                 });
             }
@@ -98,7 +100,7 @@ function getCheapest() {
     });
 }
 
-function createTrs(oneQuantity, toCheck) {
+function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
     if (oneQuantity.length == 0)
         return;
     var quantity = oneQuantity[0].quantity;
@@ -116,20 +118,36 @@ function createTrs(oneQuantity, toCheck) {
         if (sessionStorage.getItem("username") != null) {
             if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Subscribing' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='Downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#subscribe-" + quantity + "-" + ndx).click(function (ev) {
                     $(this).button("loading");
                     subscribeToBeer(entry.name, quantity, ndx);
                 });
+                if (upvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
+                    $("#upvote-" + quantity + "-" + ndx).button("loading");
+                }
+                if (downvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
+                    $("#downvote-" + quantity + "-" + ndx).button("loading");
+                }
             } else {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Unsubscribing' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='Downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#unsubscribe-" + quantity + "-" + ndx).click(function (ev) {
                     $(this).button("loading");
                     unsubscribeFromBeer(entry.name, quantity, ndx);
                 });
+                if (upvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
+                    $("#upvote-" + quantity + "-" + ndx).button("loading");
+                }
+                if (downvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
+                    $("#downvote-" + quantity + "-" + ndx).button("loading");
+                }
             }
         } else {
             tr += "</tr>";
@@ -267,12 +285,35 @@ function getSubscriptions(username) {
                 if (!response) {
                     console.log("Invalid username or password.")
                 } else {
+                    console.log("nice");
                     subscriptions = response;
-                    getCheapest();
+                    getVotes(username);
                 }
             }
         });
     }
+}
+
+
+function getVotes(username) {
+    var data = {
+        username: username
+    };
+    $.ajax({
+        url: API_URL + 'get-votes',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response == null) {
+                console.log("Uh oh")
+            } else {
+                upvotes = response[0];
+                downvotes = response[1];
+                getCheapest();
+            }
+        }
+    });
 }
 
 
@@ -371,8 +412,8 @@ function filterBy(input, toFilterBy) {
                             beer30.push(entry);
                     });
                 });
-                createTrs(beer12, subscriptions);
-                createTrs(beer30, subscriptions);
+                createTrs(beer12, subscriptions, upvotes, downvotes);
+                createTrs(beer30, subscriptions, upvotes, downvotes);
             }
         }
     });
