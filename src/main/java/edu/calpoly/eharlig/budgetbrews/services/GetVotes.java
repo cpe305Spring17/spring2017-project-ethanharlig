@@ -17,7 +17,7 @@ public class GetVotes implements RequestHandler<User, List<ArrayList<Object>>> {
   public List<ArrayList<Object>> handleRequest(User request, Context context) {
     Table usersTable = DBAccess.getTable("users");
     Item userItem = usersTable.getItem("username", request.getUsername());
-    List<ArrayList<Object>> allVotes = new ArrayList<ArrayList<Object>>();
+    List<ArrayList<Object>> allVotes = new ArrayList<>();
     allVotes.add((ArrayList<Object>) userItem.getList("upvotes"));
     allVotes.add((ArrayList<Object>) userItem.getList("downvotes"));
 
