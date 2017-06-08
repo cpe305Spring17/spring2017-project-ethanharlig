@@ -293,7 +293,7 @@ function displayStores() {
         success: function (response) {
             $("#generating").hide();
             response.forEach(function (store) {
-                $("#options").append("<input type='checkbox' name='store' value='" + store + "'>" + store.substring(0, 17) + "<br>");
+                $("#options").append("<input title='" + store + "' type='checkbox' name='store' value='" + store + "'>" + store.substring(0, 17) + "<br>");
             });
             $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter</button>");
             $("#options-container").show();
@@ -318,7 +318,7 @@ function displayBeers() {
         success: function (response) {
             $("#generating").hide();
             response.forEach(function (beerName) {
-                $("#options").append("<input type='checkbox' name='store' value='" + beerName + "'>" + beerName.substring(0, 17) + "<br>");
+                $("#options").append("<input title='" + beerName + "' type='checkbox' name='store' value='" + beerName + "'>" + beerName.substring(0, 17) + "<br>");
             });
 
             $("#options").append("<button class='btn btn-default' type='submit' id='submit-beer'>Filter</button>");
