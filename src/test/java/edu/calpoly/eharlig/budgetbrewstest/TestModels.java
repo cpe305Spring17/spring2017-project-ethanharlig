@@ -86,6 +86,8 @@ public class TestModels extends TestCase {
     obs.add("ethan.harlig@gmail.com");
     beer.setObservers(obs);
     beer.notify();
+
+    assertTrue(true);
   }
 
   public void testSubBeerName() {
@@ -101,6 +103,11 @@ public class TestModels extends TestCase {
   public void testSubQuantity() {
     sub.setQuantity(36);
     assertTrue(sub.getQuantity() == 36);
+  }
+
+  public void testSubUsername() {
+    sub.setUsername("myusername");
+    assertTrue(user.getUsername().equals("myusername"));
   }
 
   public void testUserEmail() {
