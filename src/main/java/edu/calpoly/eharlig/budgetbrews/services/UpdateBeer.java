@@ -11,7 +11,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.calpoly.eharlig.budgetbrews.dataaccess.DBAccess;
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
-import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
 
 public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 
@@ -34,9 +33,9 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
     Item toUpdate = new Item();
 
     if (item != null) {
-      List<BeerHistory> bHistory = new ArrayList<>();
+      List<Beer> bHistory = new ArrayList<>();
 
-      BeerHistory currentBeer = new BeerHistory();
+      Beer currentBeer = new Beer();
       currentBeer.setPrice(item.getDouble(PRICE));
       currentBeer.setStoreName(item.getString(STORE_NAME));
       currentBeer.setTimestamp(item.getLong(TIMESTAMP));
@@ -49,7 +48,7 @@ public class UpdateBeer implements RequestHandler<Beer, PutItemOutcome> {
 
       if (history != null) {
         for (Item i : history) {
-          BeerHistory bh = new BeerHistory();
+          Beer bh = new Beer();
           bh.setPrice(i.getDouble(PRICE));
           bh.setStoreName(i.getString(STORE_NAME));
           bh.setTimestamp(i.getLong(TIMESTAMP));

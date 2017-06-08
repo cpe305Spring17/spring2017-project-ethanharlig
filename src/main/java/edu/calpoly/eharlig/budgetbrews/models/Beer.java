@@ -25,14 +25,11 @@ public class Beer {
   private int quantity;
   private String storeName;
   private long timestamp;
-  private List<BeerHistory> history;
   private int upvotes;
   private int downvotes;
   private List<String> observers;
 
-  public Beer() {
-    this.history = new ArrayList<>();
-  }
+  public Beer() {}
 
   public String getName() {
     return name;
@@ -72,16 +69,6 @@ public class Beer {
 
   public void setTimestamp(long timestamp) {
     this.timestamp = timestamp;
-  }
-
-  public List<BeerHistory> getHistory() {
-    if (history == null)
-      return new ArrayList<>();
-    return history;
-  }
-
-  public void setHistory(List<BeerHistory> history) {
-    this.history = history;
   }
 
   public int getUpvotes() {
