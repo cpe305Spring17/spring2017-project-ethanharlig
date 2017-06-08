@@ -1,8 +1,10 @@
 package edu.calpoly.eharlig.budgetbrewstest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.models.BeerHistory;
 import edu.calpoly.eharlig.budgetbrews.models.Subscription;
 import edu.calpoly.eharlig.budgetbrews.models.User;
 import junit.framework.TestCase;
@@ -11,6 +13,12 @@ public class TestModels extends TestCase {
   Beer beer = new Beer();
   Subscription sub = new Subscription();
   User user = new User();
+  BeerHistory bh = new BeerHistory();
+  
+  
+  public void testBeerHistory() {
+    assertTrue(bh.equals(new BeerHistory()));
+  }
 
   public void testBeerConstructor() {
     assertTrue(beer.getHistory().equals(new ArrayList<>()));
@@ -69,6 +77,15 @@ public class TestModels extends TestCase {
   public void testUpvotes() {
     beer.setUpvotes(55);
     assertTrue(beer.getUpvotes() == 55);
+  }
+  
+  public void testNotify() {
+    beer.notify();
+    
+    List<String> obs = new ArrayList<>();
+    obs.add("ethan.harlig@gmail.com");
+    beer.setObservers(obs);
+    beer.notify();
   }
 
   public void testSubBeerName() {

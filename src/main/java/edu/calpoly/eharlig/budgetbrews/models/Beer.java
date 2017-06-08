@@ -112,6 +112,10 @@ public class Beer {
 
   public void notifyObservers() {
     String from = "budgetbrews305@gmail.com";
+    
+    if (this.getObservers().size() == 0)
+      return;
+
     /*
      * Setup JavaMail to use Amazon SES by specifying the "aws" protocol and our AWS credentials.
      */
