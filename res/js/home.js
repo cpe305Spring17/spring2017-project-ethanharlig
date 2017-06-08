@@ -119,13 +119,22 @@ function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
             if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Subscribing' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
                 tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='Downvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#subscribe-" + quantity + "-" + ndx).click(function (ev) {
                     $(this).button("loading");
                     subscribeToBeer(entry.name, quantity, ndx);
                 });
+                $("#upvote-" + quantity + "-" + ndx).click(function (ev) {
+                    $(this).button("loading");
+                    upvoteBeer(entry.name, quantity);
+                });
+                $("#downvote-" + quantity + "-" + ndx).click(function (ev) {
+                    $(this).button("loading");
+                    downvoteBeer(entry.name, quantity);
+                });
+
                 if (upvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
                     $("#upvote-" + quantity + "-" + ndx).button("loading");
                 }
@@ -135,13 +144,22 @@ function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
             } else {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Unsubscribing' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
                 tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='Downvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#unsubscribe-" + quantity + "-" + ndx).click(function (ev) {
                     $(this).button("loading");
                     unsubscribeFromBeer(entry.name, quantity, ndx);
                 });
+                $("#upvote-" + quantity + "-" + ndx).click(function (ev) {
+                    $(this).button("loading");
+                    upvoteBeer(entry.name, quantity);
+                });
+                $("#downvote-" + quantity + "-" + ndx).click(function (ev) {
+                    $(this).button("loading");
+                    downvoteBeer(entry.name, quantity);
+                });
+
                 if (upvotes.indexOf(entry.name + "-" + entry.quantity + "-" + entry.timestamp) != -1) {
                     $("#upvote-" + quantity + "-" + ndx).button("loading");
                 }
@@ -470,4 +488,56 @@ function unsubscribeFromBeer(beerName, quantity) {
             }
         }
     });
+}
+
+
+function upvoteBeer(beerName, quantity) {
+    var data = {
+        username: sessionStorage.getItem('username'),
+        beerName: beerName,
+        quantity: quantity
+    };
+
+    console.log(data);
+
+    $.ajax({
+        url: API_URL + 'upvote-post',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response != null) {
+                console.log("Couldn't upvote")
+            } else {
+                getSubscriptions(sessionStorage.getItem('username'));
+            }
+        }
+    });
+
+}
+
+
+function downvoteBeer(beerName, quantity) {
+    var data = {
+        username: sessionStorage.getItem('username'),
+        beerName: beerName,
+        quantity: quantity
+    };
+
+    console.log(data);
+
+    $.ajax({
+        url: API_URL + 'downvote-post',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (response != null) {
+                console.log("Couldn't upvote")
+            } else {
+                getSubscriptions(sessionStorage.getItem('username'));
+            }
+        }
+    });
+
 }
