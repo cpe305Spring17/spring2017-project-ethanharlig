@@ -9,30 +9,30 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../res/css/views/info.css">
+    <link rel="stylesheet" href="../res/css/sexyline.css">
+    <link rel="stylesheet" href="../res/css/views.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            $("#sidebar").load("../res/html/sidebar.html");
+        });
+    </script>
 </head>
 
-<body>
+<body background="../res/img/background.jpg">
     <div class="text-center">
         <img src="../res/img/logo.png" width="60%">
         <h3>Ethan Harlig</h3>
         <p class="sexy_line"></p>
     </div>
 
-    <div class="pull-left" style="width:13em;">
-        <ul>
-            <li><a href="info.html">Introduction</a></li>
-            <li><a href="interesting.html">Interesting Aspects</a></li>
-            <li><a href="architecture.html">System Architecture</a></li>
-            <li><a href="patterns.html">Design Patterns</a></li>
-            <li><a href="../index.html">Take me back to the website!</a></li>
-        </ul>
+    <div id="sidebar" class="pull-left" style="width:13em;">
     </div>
-    <div class="pull-right" style="width: 80%;">
-        <a href="../res/img/class_diagram.png">Class diagram here</a><br>
-        <p>Put architecture stuff here.</p>
+    <div style="position: absolute; width:80%; margin-left: 13em;">
+        <a href="../res/img/class_diagram.png"><img src="../res/img/class_diagram.png" width="105%"></a><br><br>
+        <p>Since the backend of this project was implemented as AWS Lambda functions, all of the Lambda functions only contain the required handleRequest function and any helper functions. This led to a relatively simple class diagram as the interactions are purely from using the models in a Lambda function and database access.</p>
     </div>
 </body>
 

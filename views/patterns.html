@@ -9,29 +9,33 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../res/css/views/info.css">
+    <link rel="stylesheet" href="../res/css/sexyline.css">
+    <link rel="stylesheet" href="../res/css/views.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            $("#sidebar").load("../res/html/sidebar.html");
+        });
+    </script>
 </head>
 
-<body>
+<body background="../res/img/background.jpg">
     <div class="text-center">
         <img src="../res/img/logo.png" width="60%">
         <h3>Ethan Harlig</h3>
         <p class="sexy_line"></p>
     </div>
 
-    <div class="pull-left" style="width:13em;">
-        <ul>
-            <li><a href="info.html">Introduction</a></li>
-            <li><a href="interesting.html">Interesting Aspects</a></li>
-            <li><a href="architecture.html">System Architecture</a></li>
-            <li><a href="patterns.html">Design Patterns</a></li>
-            <li><a href="../index.html">Take me back to the website!</a></li>
-        </ul>
+    <div id="sidebar" class="pull-left" style="width:13em;">
     </div>
-    <div class="pull-right" style="width: 80%;">
-        <p>Put patterns stuff here.</p>
+    <div style="position: absolute; width:80%; margin-left: 13em;">
+        <h1>Observer Pattern</h1>
+        <p>The observer pattern is being used for subscribing to beers. A user can subscribe (and unsubscribe) from beers and then they will be notified once the beer has changed in price. The Beer model has a notifyObservers method in which all of its observers are sent an email on price change.</p>
+        <br><br>
+        <h1>Template Pattern</h1>
+        <p>The template pattern is being used for filtering. A user can select to filter by either beers or stores. Once those have been selected, the filter method filters properly by using the user's selections.</p>
     </div>
 </body>
 
