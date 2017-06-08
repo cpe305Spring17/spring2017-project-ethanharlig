@@ -24,6 +24,8 @@ public class AddUser implements RequestHandler<User, PutItemOutcome> {
     item.withString("password", request.getPassword());
     item.withString("email", request.getEmail());
     item.withList("subscriptions", new ArrayList<String>());
+    item.withList("upvotes", new ArrayList<String>());
+    item.withList("downvotes", new ArrayList<String>());
 
     return table.putItem(item);
   }
