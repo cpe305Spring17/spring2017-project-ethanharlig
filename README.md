@@ -17,7 +17,7 @@ Users of Budget Brews are shown the cheapest beer deals near them! They can filt
     - [x] Notify users when prices are updated (Observer pattern)
       - [x] Subscribe to beers
          - [x] Notify subscribed users when a price has changed
-    - x ] Upvote and downvote user updates
+    - [x] Upvote and downvote user updates
     - [x] Username
     - [x] Password
 - Filter by
