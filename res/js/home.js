@@ -109,6 +109,9 @@ function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
     var ndx = 0;
 
     oneQuantity.forEach(function (entry) {
+        if (entry.storeName === "sonar-test-store") {
+            return;
+        }
         var tr = "<tr>";
         tr += "<td>$" + (Number(entry.price)).toFixed(2) + "</td>";
         tr += "<td>" + entry.name + "</td>";
@@ -118,8 +121,8 @@ function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
         if (sessionStorage.getItem("username") != null) {
             if (toCheck.indexOf(entry.name + "-" + quantity) == -1) {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Subscribing' id='subscribe-" + quantity + "-" + ndx + "'>Subscribe</button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#subscribe-" + quantity + "-" + ndx).click(function (ev) {
@@ -143,8 +146,8 @@ function createTrs(oneQuantity, toCheck, upvotes, downvotes) {
                 }
             } else {
                 tr += "<td><button type='button' class='btn btn-default' data-loading-text='Unsubscribing' id='unsubscribe-" + quantity + "-" + ndx + "'>Unsubscribe</button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up fa-2x' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
-                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down fa-2x' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.upvotes + " </p><button type='button' class='fa fa-thumbs-up' data-loading-text='Upvoted' id='upvote-" + quantity + "-" + ndx + "'></button></td>";
+                tr += "<td><p style='display: inline; font-size: 150%;'>" + entry.downvotes + " </p><button type='button' class='fa fa-thumbs-down' data-loading-text='Downvoted' id='downvote-" + quantity + "-" + ndx + "'></button></td>";
                 tr += "</tr>";
                 $("#brews-table-" + entry.quantity + " tbody").append(tr);
                 $("#unsubscribe-" + quantity + "-" + ndx).click(function (ev) {
