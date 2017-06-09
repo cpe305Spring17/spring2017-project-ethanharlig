@@ -4,8 +4,6 @@ var upvotes = [];
 var downvotes = [];
 
 $(document).ready(function () {
-    //  party mode below!
-    //    createPartyBackground();
     if (sessionStorage.getItem("username") != null) {
         $("#sign-in").hide();
         $("#sign-out").show();
@@ -66,6 +64,7 @@ $(document).ready(function () {
         $("#options").empty();
         $("#generating").show();
         displayStores();
+        $("#filter-reset").show();
         ev.preventDefault();
     });
 
@@ -73,6 +72,7 @@ $(document).ready(function () {
         $("#options").empty();
         $("#generating").show();
         displayBeers();
+        $("#filter-reset").show();
         ev.preventDefault();
     });
 
@@ -225,20 +225,6 @@ function handleUpdate() {
 }
 
 
-function createPartyBackground() {
-    for (var x = -1; x < $(document).width() / 140; x += 1) {
-        for (var y = -1; y < $(document).height() / 130; y += 1) {
-            var img = $("<img />", {
-                style: "position:absolute; top:" + ((y * 14) + 5) + "%; left:" + (x * 15) + "%; z-index: -1;",
-                src: "res/img/party.gif",
-                width: "19%"
-            });
-            img.appendTo($("#background-imgs"));
-        }
-    }
-}
-
-
 function authenticateUser() {
     var data = {
         username: $("#username").val(),
@@ -291,6 +277,7 @@ function addUser() {
 
 
 function getSubscriptions(username) {
+    $("#display-loading").show();
     if (username == null) {
         getCheapest();
     } else {
@@ -317,6 +304,7 @@ function getSubscriptions(username) {
 
 
 function getVotes(username) {
+    $("#display-loading").show();
     var data = {
         username: username
     };
@@ -359,16 +347,24 @@ function displayStores() {
                     return;
                 $("#options").append("<input title='" + store + "' type='checkbox' name='store' value='" + store + "'>" + store.substring(0, 17) + "<br>");
             });
-            $("#options").append("<button class='btn btn-default' type='submit' id='submit-store'>Filter</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' data-loading-text='Filtering' id='submit-store'>Filter</button>");
+            $("#options").append("<button class='btn btn-default' type='button' data-loading-text='Resetting' id='filter-reset'>Reset</button>");
             $("#options-container").show();
             $("#submit-store").click(function (ev) {
                 var selected = [];
                 $("#options-container input:checked").each(function () {
                     selected.push($(this).attr('value'));
                 });
-                filterBy(selected, 'stores');
+                filterBy(selected, 'stores', "#submit-store");
+                $("#submit-store").button("loading");
                 ev.preventDefault();
             });
+            $("#filter-reset").click(function (ev) {
+                console.log("reset");
+                getSubscriptions(sessionStorage.getItem("username"));
+                $("#options").empty();
+            });
+
         }
     });
 
@@ -387,22 +383,30 @@ function displayBeers() {
                 $("#options").append("<input title='" + beerName + "' type='checkbox' name='store' value='" + beerName + "'>" + beerName.substring(0, 17) + "<br>");
             });
 
-            $("#options").append("<button class='btn btn-default' type='submit' id='submit-beer'>Filter</button>");
+            $("#options").append("<button class='btn btn-default' type='submit' data-loading-text='Filtering' id='submit-beer'>Filter</button>");
+            $("#options").append("<button class='btn btn-default' type='button' data-loading-text='Resetting' id='filter-reset'>Reset</button>");
             $("#options-container").show();
             $("#submit-beer").click(function (ev) {
                 var selected = [];
                 $("#options-container input:checked").each(function () {
                     selected.push($(this).attr('value'));
                 });
-                filterBy(selected, 'beers');
+                filterBy(selected, 'beers', "#submit-beer");
+                $("#submit-beer").button("loading");
                 ev.preventDefault();
             });
+            $("#filter-reset").click(function (ev) {
+                console.log("reset");
+                getSubscriptions(sessionStorage.getItem("username"));
+                $("#options").empty();
+            });
+
         }
     });
 }
 
 
-function filterBy(input, toFilterBy) {
+function filterBy(input, toFilterBy, buttonName) {
     var data = {
         filter: toFilterBy
     };
@@ -422,6 +426,7 @@ function filterBy(input, toFilterBy) {
             if (response == null) {
                 console.log("Dang");
             } else {
+                $(buttonName).button("reset");
                 $("#brews-table-12 tbody").empty();
                 $("#brews-table-30 tbody").empty();
                 var beer12 = [];
