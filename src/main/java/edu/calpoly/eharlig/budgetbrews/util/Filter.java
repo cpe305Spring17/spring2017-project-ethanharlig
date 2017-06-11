@@ -14,7 +14,7 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
 
   public List<List<Beer>> handleRequest(Map<String, String> request, Context context) {
     if (request.isEmpty()) {
-      return new ArrayList<List<Beer>>();
+      return new ArrayList<>();
     }
     String toFilter = request.get("filter");
     request.remove("filter");
