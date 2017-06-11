@@ -13,6 +13,9 @@ Crowdsource the best beer deals near you (_currently have support for San Luis O
 
 Users of Budget Brews are shown the cheapest beer deals near them! They can filter the beer prices by beer brand and store in which they can select multiple brands or stores to filter. 
 
+- Pricing
+    - [x] View the most recent reports for all beers and stores
+    - [x] Update beer prices as users find them
 - Users
     - [x] Notify users when prices are updated (Observer pattern)
       - [x] Subscribe to beers
