@@ -21,5 +21,7 @@ public class TestFilter extends TestCase {
         System.out.println(b.getName());
       }
     }
+    
+    filter.handleRequest(new HashMap<String, String>(), null);
   }
 }

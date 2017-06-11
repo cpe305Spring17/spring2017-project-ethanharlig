@@ -13,6 +13,9 @@ import edu.calpoly.eharlig.budgetbrews.services.GetAll;
 public class Filter implements RequestHandler<Map<String, String>, List<List<Beer>>> {
 
   public List<List<Beer>> handleRequest(Map<String, String> request, Context context) {
+    if (request.isEmpty()) {
+      return new ArrayList<List<Beer>>();
+    }
     String toFilter = request.get("filter");
     request.remove("filter");
 

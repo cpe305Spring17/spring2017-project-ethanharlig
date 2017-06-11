@@ -27,5 +27,9 @@ public class TestServices extends TestCase {
     updateBeer.handleRequest(newBeer, null);
     
   }
+  
+  public void test() {
+    
+  }
 
 }
