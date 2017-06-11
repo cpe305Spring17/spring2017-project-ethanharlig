@@ -22,40 +22,43 @@ public class Filter implements RequestHandler<Map<String, String>, List<List<Bee
     List<Beer> beer12 = GetAll.getAllQuantity(12);
     List<Beer> beer30 = GetAll.getAllQuantity(30);
 
-    List<List<Beer>> byBeer12 = new ArrayList<>();
-    List<List<Beer>> byBeer30 = new ArrayList<>();
+    List<List<Beer>> allBeer12 = new ArrayList<>();
+    List<List<Beer>> allBeer30 = new ArrayList<>();
     List<Beer> eachBeer12 = new ArrayList<>();
     List<Beer> eachBeer30 = new ArrayList<>();
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
-      byBeer12.add(filter(toFilter, beer12, entry.getValue()));
+      allBeer12.add(filter(toFilter, beer12, entry.getValue()));
     }
 
-    for (List<Beer> beers : byBeer12) {
+    for (List<Beer> beers : allBeer12) {
       eachBeer12.addAll(beers);
     }
 
     for (Map.Entry<String, String> entry : request.entrySet()) {
-      byBeer30.add(filter(toFilter, beer30, entry.getValue()));
+      allBeer30.add(filter(toFilter, beer30, entry.getValue()));
     }
 
-    for (List<Beer> beers : byBeer30) {
+    for (List<Beer> beers : allBeer30) {
       eachBeer30.addAll(beers);
     }
 
     eachBeer12 = Sorting.sort(eachBeer12);
     eachBeer30 = Sorting.sort(eachBeer30);
 
-    List<List<Beer>> byStore = new ArrayList<>();
+    List<List<Beer>> filtered = new ArrayList<>();
 
-    byStore.add(eachBeer12);
-    byStore.add(eachBeer30);
+    filtered.add(eachBeer12);
+    filtered.add(eachBeer30);
 
-    return byStore;
+    return filtered;
   }
 
   public static List<Beer> filter(String toFilter, List<Beer> beers, String toFind) {
     List<Beer> allBeers = new ArrayList<>();
+    if (toFilter == null || beers == null || toFind == null)
+      return new ArrayList<>();
+
     if (toFilter.equals("stores")) {
       for (Beer beer : beers) {
         if (beer.getStoreName().equals(toFind)) {
