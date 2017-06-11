@@ -3,12 +3,14 @@ package edu.calpoly.eharlig.budgetbrewstest;
 import java.util.Random;
 
 import edu.calpoly.eharlig.budgetbrews.models.Beer;
+import edu.calpoly.eharlig.budgetbrews.services.GetCheapest;
 import edu.calpoly.eharlig.budgetbrews.services.UpdateBeer;
 import junit.framework.TestCase;
 
 public class TestServices extends TestCase {
   Beer beer = new Beer();
   UpdateBeer updateBeer = new UpdateBeer();
+  GetCheapest getCheapest = new GetCheapest();
   
   public void testUpdateBeer() {
     beer.setName("sonar-test-IPA");
@@ -28,7 +30,11 @@ public class TestServices extends TestCase {
     
   }
   
-  public void test() {
+  public void testGetCheapest() {
+    getCheapest.handleRequest(null, null);
+
+    GetCheapest.getCheapestQuantity(12);
+    GetCheapest.getCheapestQuantity(30);
     
   }
 

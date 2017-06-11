@@ -23,7 +23,7 @@ public class GetCheapest implements RequestHandler<Object, List<Beer>> {
     return beers;
   }
 
-  private Beer getCheapestQuantity(int quantity) {
+  public static Beer getCheapestQuantity(int quantity) {
     ScanRequest scanRequest = new ScanRequest().withTableName("beer-" + quantity);
 
     ScanResult result = DBAccess.scan(scanRequest);
