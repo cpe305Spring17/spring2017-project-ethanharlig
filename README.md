@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig.svg?branch=master)](https://travis-ci.org/cpe305Spring17/spring2017-project-ethanharlig)
 
-![Budget Brews](res/img/logo.png)
+![Budget Brews](src/main/website/res/img/logo.png)
 
 ## Ethan Harlig 
 ### Hosting of website through gh-pages branch. Please [click here](https://cpe305spring17.github.io/spring2017-project-ethanharlig/) to check out my site!
@@ -13,6 +13,9 @@ Crowdsource the best beer deals near you (_currently have support for San Luis O
 
 Users of Budget Brews are shown the cheapest beer deals near them! They can filter the beer prices by beer brand and store in which they can select multiple brands or stores to filter. 
 
+- Pricing
+    - [x] View the most recent reports for all beers and stores
+    - [x] Update beer prices as users find them
 - Users
     - [x] Notify users when prices are updated (Observer pattern)
       - [x] Subscribe to beers
